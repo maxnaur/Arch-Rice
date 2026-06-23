@@ -1,0 +1,94 @@
+# install kde plasma
+timedatectl
+pacman -Sy archlinux-keyring
+archinstall
+# boot with nomodeset
+
+
+go /etc/default/grub
+# add
+GRUB_CMDLINE_LINUX_DEFAULT="quiet splash nvidia_drm.modeset=1"
+
+sudo pacman -S egl-wayland
+sudo pacman -S qt5-wayland qt6-wayland
+
+open /usr/share/hypr/hyprland.conf
+# make it uk keybord; pain
+# get monitor
+hyprctl monitors -j
+monitor=DP-1,preferred,auto,1.5
+
+# Environment Variables
+env = XDG_CURRENT_DESKTOP,Hyprland
+env = XDG_SESSION_TYPE,wayland
+env = XDG_SESSION_DESKTOP,Hyprland
+env = ELECTRON_OZONE_PLATFORM_HINT,wayland
+# nvidia so may be broken
+env = LIBVA_DRIVER_NAME,nvidia
+env = GBM_BACKEND,nvidia-drm
+env = __GLX_VENDOR_LIBRARY_NAME,nvidia
+env = NVD_BACKEND,direct
+
+# reload
+hyprctl reload
+
+# bluetooth (kinda ass but it's small and official)
+bluez bluez-utils bluez-deprecated-tools
+
+# wifi
+impala
+
+# clipboard
+wl-clipboard
+
+
+# waybar
+sudo pacman -S ttf-font-awesome
+
+
+
+authentication agent: missing (needed?)
+
+terminal = kitty
+applaucher = hyprlauncher (look for better option (Rofi))
+wallpaper = hyprpaper
+
+
+# set up
+
+sudo nvim /usr/share/hypr/hyprland.conf
+
+# wallpaper
+hyprpaper
+# create file at
+.config/hypr/hyprpaper.conf
+# wright in
+preload=path/to/wallpaper/image
+wallpaper=<monitor-name>,path/to/wallpaper/image
+# find monitor names
+hyprctl monitors
+(eDP-2) and (HDMI-A-1)
+# for just 1 wall paper
+preload=/home/max/Documents/arch/wallpaper/wallhaven-p8d6oj.jpg
+
+
+
+
+
+to do:
+hyprland file actualy change things
+fix wallpaper (hyprpaper)
+make hyprlauncher look better (also change to ault space)
+waybar set up
+make backup
+git and understand it
+run local AI
+tor
+vertual mechine
+wireshark (https://aur.archlinux.org/packages/wireshark-git)
+
+- sierys pirating
+- fastfetch (customise)
+
+
+

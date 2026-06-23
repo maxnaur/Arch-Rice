@@ -1,0 +1,28 @@
+ubuntu
+- visual studio
+- opera
+- guake terminal
+- wobley windows
+
+arch
+- visual studio code
+- opera ✅ and ☠️
+- steam ✅
+- GPU fix ✅
+- Zen ✅
+- Brave ✅
+- cysco packet tracer
+- LocalSend
+- backup
+- run local AI
+- tor
+- vertual mechine
+- git and understand it
+- wireshark (https://aur.archlinux.org/packages/wireshark-git)
+- sierys pirating
+- fastfetch (customise)
+- waybar
+- minecraft ✅
+hyprland
+https://github.com/JaKooLit/Ubuntu-Hyprland
+

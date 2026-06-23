@@ -1,0 +1,120 @@
+{
+  "72f8f48d-86b9-4487-acea-eb4977b18f21": {
+    "id": "72f8f48d-86b9-4487-acea-eb4977b18f21",
+    "name": "Better CtrlTab Panel",
+    "description": "Re-style and add customization options for the CtrlTab panel.",
+    "homepage": "https://github.com/psu/zen-mods",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/72f8f48d-86b9-4487-acea-eb4977b18f21/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/72f8f48d-86b9-4487-acea-eb4977b18f21/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/72f8f48d-86b9-4487-acea-eb4977b18f21/image.png",
+    "author": "psu",
+    "version": "1.0.1",
+    "tags": [],
+    "createdAt": "2025-03-28",
+    "updatedAt": "2025-05-22",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/72f8f48d-86b9-4487-acea-eb4977b18f21/preferences.json",
+    "enabled": false
+  },
+  "1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6": {
+    "id": "1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6",
+    "name": "Remove Tab X",
+    "description": "Removes the X from tabs which closes them.",
+    "homepage": "https://github.com/xXMacMillanXx/remove-tab-x",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6/image.png",
+    "author": "xXMacMillanXx",
+    "version": "1.1.1",
+    "tags": [],
+    "createdAt": "2025-03-11",
+    "updatedAt": "2026-02-18",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/1b88a6d1-d931-45e8-b6c3-bfdca2c7e9d6/preferences.json",
+    "enabled": true
+  },
+  "c01d3e22-1cee-45c1-a25e-53c0f180eea8": {
+    "id": "c01d3e22-1cee-45c1-a25e-53c0f180eea8",
+    "name": "Ghost Tabs",
+    "description": "Makes unloaded tabs & folders appear ghost-like by making them grayscale and transparent.",
+    "homepage": "https://github.com/Seismix/zen-ghost-tabs",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c01d3e22-1cee-45c1-a25e-53c0f180eea8/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c01d3e22-1cee-45c1-a25e-53c0f180eea8/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c01d3e22-1cee-45c1-a25e-53c0f180eea8/image.png",
+    "author": "Seismix",
+    "version": "1.1.0",
+    "tags": [],
+    "createdAt": "2025-10-02",
+    "updatedAt": "2026-03-11",
+    "enabled": true
+  },
+  "c5f7fb68-cc75-4df0-8b02-dc9ee13aa773": {
+    "id": "c5f7fb68-cc75-4df0-8b02-dc9ee13aa773",
+    "name": "Audio TabIcon Plus",
+    "description": "Enhance audio/mute tab-icon",
+    "homepage": "",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c5f7fb68-cc75-4df0-8b02-dc9ee13aa773/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c5f7fb68-cc75-4df0-8b02-dc9ee13aa773/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c5f7fb68-cc75-4df0-8b02-dc9ee13aa773/image.png",
+    "author": "DaitiDay",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/c5f7fb68-cc75-4df0-8b02-dc9ee13aa773/preferences.json",
+    "version": "1.0.1",
+    "tags": [
+      "tabs"
+    ],
+    "createdAt": "2024-08-28",
+    "updatedAt": "2025-04-09",
+    "enabled": false
+  },
+  "4ab93b88-151c-451b-a1b7-a1e0e28fa7f8": {
+    "id": "4ab93b88-151c-451b-a1b7-a1e0e28fa7f8",
+    "name": "No Sidebar Scrollbar",
+    "description": "This theme removes the Sidebar Scrollbar while retaining the scroll functionality.",
+    "homepage": "https://github.com/mally8/zen-browser-no-sidebar-scrollbar",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/4ab93b88-151c-451b-a1b7-a1e0e28fa7f8/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/4ab93b88-151c-451b-a1b7-a1e0e28fa7f8/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/4ab93b88-151c-451b-a1b7-a1e0e28fa7f8/image.png",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/4ab93b88-151c-451b-a1b7-a1e0e28fa7f8/preferences.json",
+    "author": "mally8",
+    "version": "1.0.8",
+    "tags": [
+      "sidebar",
+      "scrollbar"
+    ],
+    "createdAt": "2024-09-01",
+    "updatedAt": "2025-05-22",
+    "enabled": true
+  },
+  "74c755b3-41a5-4f78-83cb-cd1e1e076bb6": {
+    "id": "74c755b3-41a5-4f78-83cb-cd1e1e076bb6",
+    "name": "Better UniExtBtn",
+    "description": "change unified extensions button to zen browser icon",
+    "homepage": "",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/74c755b3-41a5-4f78-83cb-cd1e1e076bb6/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/74c755b3-41a5-4f78-83cb-cd1e1e076bb6/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/74c755b3-41a5-4f78-83cb-cd1e1e076bb6/image.png",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/74c755b3-41a5-4f78-83cb-cd1e1e076bb6/preferences.json",
+    "author": "lindongbin",
+    "version": "1.0.1",
+    "tags": [],
+    "createdAt": "2024-08-30",
+    "updatedAt": "2025-01-26",
+    "enabled": false
+  },
+  "22c9ec3b-7c62-46ae-991f-c8fff5046829": {
+    "id": "22c9ec3b-7c62-46ae-991f-c8fff5046829",
+    "name": "Tab Numbers",
+    "description": "Shows the Number corresponding to each Tab.",
+    "homepage": "https://github.com/philmard/tab-numbers",
+    "style": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/22c9ec3b-7c62-46ae-991f-c8fff5046829/chrome.css",
+    "readme": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/22c9ec3b-7c62-46ae-991f-c8fff5046829/readme.md",
+    "image": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/22c9ec3b-7c62-46ae-991f-c8fff5046829/image.png",
+    "author": "philmard",
+    "version": "1.0.8",
+    "preferences": "https://raw.githubusercontent.com/zen-browser/theme-store/main/themes/22c9ec3b-7c62-46ae-991f-c8fff5046829/preferences.json",
+    "tags": [
+      "tabs"
+    ],
+    "createdAt": "2024-11-09",
+    "updatedAt": "2025-07-15",
+    "enabled": true
+  }
+}

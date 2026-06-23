@@ -1,0 +1,102 @@
+Debian
+sudo apt install btop qbittorrent wireshark
+
+# allow like half the packets
+sudo sed -i 's/main/main contrib non-free non-free-firmware/g' /etc/apt/sources.list
+sudo apt update
+# nvidia drivers
+sudo apt install linux-headers-$(uname -r)
+sudo apt install linux-headers-amd64
+sudo apt update
+sudo apt install nvidia-detect
+nvidia-detect
+sudo apt install -y nvidia-kernel-dkms nvidia-driver firmware-misc-nonfree nvidia-cuda-toolkit
+sudo reboot
+#verifiy
+nvidia-smi
+lsmod | grep nvidia
+# no work
+sudo mkdir -p /etc/modprobe.d
+sudo nano /etc/modprobe.d/nvidia-drm.conf
+# add to file
+options nvidia_drm modeset=1
+options nvidia_drm private_drm=1
+options nvidia_drm probe_all_gpus=0
+options nvidia NVreg_DeviceFileUID=0 NVreg_DeviceFileGID=44 NVreg_ModVersion=1
+sudo update-initramfs -u
+sudo reboot
+
+# steam
+sudo apt install ca-certificates curl -y
+sudo dpkg --add-architecture i386
+sudo apt update
+sudo apt install steam
+
+# zen
+curl -fsSL https://github.com/zen-browser/updates-server/raw/refs/heads/main/install.sh | $SHELL
+
+# prismlauncher
+sudo wget https://prism-launcher-for-debian.github.io/repo/prismlauncher.gpg -O /usr/share/keyrings/prismlauncher-archive-keyring.gpg \
+&& echo "deb [signed-by=/usr/share/keyrings/prismlauncher-archive-keyring.gpg] https://prism-launcher-for-debian.github.io/repo $(. /etc/os-release; echo "${UBUNTU_CODENAME:-${DEBIAN_CODENAME:-${VERSION_CODENAME}}}") main" | sudo tee /etc/apt/sources.list.d/prismlauncher.list \
+&& sudo apt update \
+&& sudo apt install prismlauncher
+
+# discord
+wget "https://discord.com/api/download?platform=linux&format=deb" -O discord.deb
+sudo apt install ./discord.deb
+
+# spotify
+curl -sS https://download.spotify.com/debian/pubkey_5384CE82BA52C83A.asc | sudo gpg --dearmor --yes -o /etc/apt/trusted.gpg.d/spotify.gpg
+echo "deb https://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get update && sudo apt-get install spotify-client
+
+# brave
+sudo apt install apt-transport-https curl
+sudo curl -fsSLo /usr/share/keyrings/brave-browser-archive-keyring.gpg https://brave-browser-apt-release.s3.brave.com/brave-browser-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/brave-browser-archive-keyring.gpg] https://brave-browser-apt-release.s3.brave.com/ stable main" | sudo tee /etc/apt/sources.list.d/brave-browser-release.list
+sudo apt update && sudo apt install brave-browser
+
+# install exfat for accessing big server
+sudo apt update && sudo apt install exfatprogs exfat-fuse -y
+sudo mkdir -p /mnt/exfat-drive
+lsblk
+sudo mount -t exfat /dev/sdb1 /mnt/exfat-drive
+# ntfs
+sudo mount -t ntfs-3g /dev/sdb1 /mnt/exfat-drive
+
+# predetor laptop (https://github.com/cleyton1986/predator-sense)
+sudo apt update
+sudo apt install pkexec polkitd polkit-kde-agent-1
+# one line
+sudo rm -f /tmp/ps-install.sh && curl -fsSL https://raw.githubusercontent.com/cleyton1986/predator-sense/main/scripts/remote-install.sh -o /tmp/ps-install.sh && sudo bash /tmp/ps-install.sh
+# the fixes that weren't included
+
+# visual studio
+# set up
+curl https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg
+sudo install -o root -g root -m 644 microsoft.gpg /etc/apt/keyrings/microsoft-archive-keyring.gpg
+echo "deb [arch=amd64,arm64,armhf signed-by=/etc/apt/keyrings/microsoft-archive-keyring.gpg] https://packages.microsoft.com/repos/code stable main" | sudo tee /etc/apt/sources.list.d/vscode.list
+# actualy install
+sudo apt-get update
+sudo apt-get install code
+
+# gemini
+sudo apt install npm
+sudo npm install -g @google/gemini-cli
+
+# set up proton vpn
+wget https://repo.protonvpn.com/debian/dists/stable/main/binary-all/protonvpn-stable-release_1.0.8_all.deb
+# install
+sudo dpkg -i ./protonvpn-stable-release_1.0.8_all.deb && sudo apt update
+sudo apt install proton-vpn-gnome-desktop
+
+
+
+
+
+# empty directory dumbly
+yes | rm -rfi 'direcory'
+# copy file
+sudo cp -r /home/max/Desktop /
+
+sudo apt update && sudo apt upgrade -y

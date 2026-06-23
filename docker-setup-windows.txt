@@ -1,0 +1,35 @@
+# what I did
+docker pull ollama/ollama
+# start container
+docker run -d --gpus=all -v ollama:/root/.ollama -p 11434:11434 --name ollama ollama/ollama
+# run model locally
+docker exec -it ollama ollama run qwen3.5:9b
+# website
+http://localhost:11434
+
+# web ui
+docker run -d -p 3000:8080 --gpus all --add-host=host.docker.internal:host-gateway -v open-webui:/app/backend/data --name open-webui --restart always ghcr.io/open-webui/open-webui:cuda
+
+
+
+# docker
+sudo pacman -S docker
+# enable docker
+sudo systemctl enable --now docker
+# verify
+sudo docker run --rm hello-world
+# install ollama (GPU)
+sudo docker run -d --name ollama --gpus all -p 11434:11434 ollama/ollama:latest
+
+# run ai modle
+# start container
+sudo docker start 537e81c4cb4aadf0badb57b29e0f805a0db69da86115d1bc9ec0bd6ca7664773
+# verify
+sudo docker ps
+# start
+sudo docker exec -it 537e81c4cb4a ollama run qwen3.5
+# disable docker
+sudo systemctl stop docker.socket docker.service
+sudo systemctl disable --now docker
+# remove
+sudo docker rm -f ollama

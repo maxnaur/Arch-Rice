@@ -1,0 +1,51 @@
+sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y
+sudo apt install guake btop htop vlc
+./opera-stable_123.0.5669.47_amd64.deb ./code_1.106.0-1762878362_amd64.deb
+
+sudo snap install discord steam
+
+# terminal drop down
+guake
+# game
+steam 
+discord 
+# opera
+./opera-stable_123.0.5669.47_amd64.deb 
+# vs code
+./code_1.106.0-1762878362_amd64.deb
+
+# image editor
+gimp
+# Video Editors
+Kdenlive
+# PDF Editing Tools
+LibreOffice Draw
+PDF Studio
+
+# video
+vlc
+# audio
+Audacity
+
+# screan record
+Kazam
+
+# task manager
+Stacer
+htop
+btop
+
+# fuzy find 
+Flathub
+
+# run app
+albert (apt space)
+ulauncher (ctrl space)
+
+# look at specks
+neofetch
+
+# top bar
+waybar
+
+

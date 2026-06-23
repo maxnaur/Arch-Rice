@@ -1,0 +1,460 @@
+# pacman
+# install thing
+sudo pacman -S 'pacage'
+# update
+sudo pacman -Syu
+# display root packets (the packets that install other packets)
+# use before uninstalling packet to make sure it won't break anything (there are checks in place but safty is cool for crytical and random things)
+sudo pacman -Qtd
+
+# remove/uninistall packet and config
+pacman -Rn 'pacage'
+# remove a package and its dependencies (which are not required by any other installed package)
+pacman -Rns 'pacage'
+
+# list all foreign packets
+pacman -Qm
+# check package installed
+pacman -Q | grep 'pagage'
+
+# update everything
+sudo pacman -Syu && sudo yay -Syu && flatpak update
+
+# note basic
+^Z # pauses/closes your application
+^C # end application
+
+
+# Desktop enviroments
+- KDE Plasma
+    power-profiles-daemon
+    kwalletmanager (just so I can turn it off)
+- Hyperland
+    wayland
+    waybar
+
+# wifi
+systemctl start iwd
+iwctl
+station list
+station wlan0 scan
+station wlan0 get-networks
+station wlan0 connect 'nettwork'
+password: ***
+
+# terminal GUI
+nmtui
+
+
+# AUR
+sudo pacman -S git base-devel
+# use directory like ~/build I use ~/AUR/ like a noob
+
+# makepkg menings
+-s # download the shit
+-i # install so not have to use pacman -U 'package_name-version-architecture.pkg.tar.zst'
+-c # clean up to remove unnecessary shit
+
+# install yay
+# install less as it displays things that will be installed in style of vim
+less
+git clone https://aur.archlinux.org/yay.git
+cd 'yay'
+makepkg -sic
+
+# update
+# git pull and repeat following steps
+# or yay -Syu
+
+# for future AUR
+# find packets installed
+yay -Qm
+# installs packets to /usr/lib/
+yay -S 'packet'
+
+# install throught the AUR for a gui installer
+pacseek
+
+# allow 32 bit
+multilib
+go to /etc/pacman.conf
+and uncomment
+$ [multilib]
+$ Include = /etc/pacman.d/mirrorlist
+
+
+# install grafic driver from AUR (not seported :[)
+# grafic card: AD106, NV190 family (Ada Lovelace)
+yay -S nvidia-580xx-dkms nvidia-580xx-settings lib32-nvidia-580xx-utils
+# restart
+# check works
+nvidia-smi
+# if not
+sudo nano /etc/mkinitcpio.conf
+# MODULES=(nvidia)
+# line 82 remove as it's an error code
+sudo pacman -S nvidia-settings
+# in games
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
+
+# fan speed
+# get sensors
+yes | sudo sensors-detect
+# test fans
+pwmconfig
+    # get gui for fan spped
+    sudo systemctl start fancontrol.service
+    sudo systemctl enable fancontrol.service
+    fancontrol-gui
+# fail
+sudo modprobe pwm-fan
+# acer
+# use AUR :(
+yay -S linuwu-sense-dkms
+# config
+https://github.com/0x7375646F/Linuwu-Sense
+# /sys/module/linuwu_sense/drivers/platform:acer-wmi/acer-wmi/predator_sense
+
+yay -S zen-browser-bin brave-bin
+
+
+# install general packets
+# games
+steam mandoc prismlauncher
+
+# internet
+firefox spotify-launcher
+
+# extera shit
+qbittorrent coreutils btop htop mpv
+
+# USB
+gparted
+
+# neovim
+nvim 'file_path'
+# set up LazyVim
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+nvim
+
+# python
+sudo pacman -S python
+sudo pacman -S python-'packet name'
+
+# set up audio
+sudo pacman -S pavucontrol alsa-utils
+pavucontrol
+
+
+# flatpak
+sudo pacman -S flatpak
+flatpak update
+flatpak list
+flatpak uninistall --delete-data 'app'
+
+flatpak install opera brave zen discord
+
+# roadblox
+flatpak install sober
+
+
+# AUR Install list with yay
+# local send
+localsend
+
+# vs code
+visual-studio-code-bin
+# dissable portal and make open firefox
+# Add to ~/.bashrc
+export BROWSER=firefox
+export GTK_USE_PORTAL=0
+# reload
+source ~/.bashrc
+
+# cissco pacet tracer
+packettracer
+# before sellecting version go to /home/max/.cache/yay/packettracer/
+# add CiscoPacketTracer_900_Ubuntu_64bit.deb
+# run and check for errors with /usr/lib/packettracer/packettracer.AppImage
+# not opening error
+click "Advanced settings" and check the box for "using internal browser"
+# worked before but may not be needed this time
+    # file
+    sudo nvim /usr/bin/packettracer
+    # add
+        #!/bin/bash
+        unset QT_PLUGIN_PATH
+        unset QT_QPA_PLATFORM_PLUGIN_PATH
+        export LD_LIBRARY_PATH=""
+        /usr/lib/packettracer/packettracer.AppImage "$@"
+    cd /usr/lib/packettracer
+    sudo ./packettracer.AppImage --appimage-extract
+    sudo mv squashfs-root /opt/packettracer
+    sudo rm /opt/packettracer/opt/pt/bin/libQt6*
+    # file
+    sudo nano /usr/local/bin/packettracer
+    # add
+        #!/bin/bash
+        cd /opt/packettracer
+        ./AppRun "$@"
+    sudo chmod +x /usr/local/bin/packettracer
+    # run the thing
+    env -i HOME="$HOME" DISPLAY="$DISPLAY" XAUTHORITY="$XAUTHORITY" /usr/lib/packettracer/packettracer.AppImage
+# uses /home/max/pt for files
+
+# extentions
+PTAlignToGrid-main.zip
+# set default light mode when using
+
+# autopsy
+sudo pacman -S gradle jdk-openjdk
+yay -S autopsy
+
+# tor
+torbrowser-launcher
+
+wireshark
+wireshark-qt
+
+# vertual mechine
+virtualbox virtualbox-host-modules-arch linux-headers
+
+# Usb
+ventoy-bin exfat-utils
+
+
+
+# nmap
+nmap -A -T4 scanme.nmap.org
+scans ports of scanme.nmap.org
+# scan a list of targest in a file
+-iL 'file_name'
+# list targets to scan
+-sL
+# ping scan
+-sn
+# Scan Techniques
+# TCP
+-sS/-sT/-sA/sW/sM
+# UDP
+-sU
+# scan set of ports
+-p 'port_range'
+# fast so scan less ports
+-F
+# scan ports based on vibes 0 light - 9 all ports
+-sV --version-intensity '0-9'
+# OS detection
+-O
+
+
+
+
+
+
+# git
+git init
+git add .
+
+
+# mysql
+# didn't show up on yay for some reason
+git pull https://aur.archlinux.org/mysql.git
+# do
+
+
+
+mariadb phpmyadmin
+
+
+# mount usb
+lsblk
+
+# fix usb not being openable
+sudo mount -t ntfs-3g /dev/sda1 /media/max/
+
+
+
+
+
+
+
+# done list
+
+# update yay manually
+# use yay to install vs code instead of git
+
+# fix cisco
+# do cisco work
+
+read nvim
+
+# do the login regester
+
+# forensics tables
+
+# forensics tables
+
+# github
+
+# look into bootstraps
+# do css for more pages
+
+
+
+# wireshark week 3
+
+# clean data in maths
+
+
+
+
+
+
+
+# to do:
+
+# forensics SIM reading 
+
+# server
+# add a terms and conditions
+
+# memorise
+# 7 layer modle
+# !Pv4 Header modle
+# TCP common ports
+
+# read files
+
+# read grep documentation
+
+# do the reading from last tearm
+
+# look at if it's worth switching to alacritty over Kitty Terminal
+
+# application launcher Rofi
+
+# waybar
+sudo pacman -S waybar
+otf-font-awesome
+# config
+sudo nvim /etc/xdg/waybar/config.jsonc
+
+# set up an account with like 6 people for £5 each
+https://proton.me/
+
+Hyperland
+
+style everything to catppuccin
+
+
+
+
+
+
+# look prity CLI
+# fastfetch
+# matrix
+# pipes
+# CAVA
+
+
+# TMUX
+# or alternative
+
+# add aliases
+nvim ~/.bashrc
+# add lines
+alias ..='cd ..'
+alias ...='cd .. && cd ..'
+alias cl=clear
+# reload
+source ~/.bashrc
+
+
+# Autojump (find file)
+autojump-gitAUR is a python script which allows navigating the file system by searching for strings in a database with the user's most-visited paths.
+zoxide is an alternative which has additional features and performance improvements compared to the original autojump and can serve as a drop-in replacement for autojump.
+
+# Prevent overwrite of files
+For the current session, to disallow existing regular files to be overwritten by redirection of shell output:
+$ set -o noclobber
+This is identical to set -C.
+To make the changes persistent for your user:
+~/.bashrc
+...
+set -o noclobber
+To manually overwrite a file while noclobber is set:
+$ echo "output" >| file.txt
+
+
+# find all AUR packages
+Use aurpkglist from python3-aur
+
+
+
+# commandline things
+# nmtui with (network manager)
+# pavucontrol
+# btop and htop
+
+# discouver
+# ncdu
+    #tree of space used
+# ripgrep
+    # finds errors in logs
+    sudo rg -c "ERROR" /var/log
+# mosh
+    # better SSH as it keep connection open and saves session
+# mtr
+    # dispay ping ressults hop by hop live
+    mtr 8.8.8.8
+# fd
+    # fast file search
+    # search recursively
+    fd cisco
+    -H # ignore hidden files and dirrectorys
+# fzf
+    # fuzzy find
+# ranger
+    # doulphin alternative for terminal
+# zoxide
+    # easyer cd but not use; want to learn dirrectorys
+# exa
+    # ls but pritty and with tree
+    # exa -T
+    # exa --icons
+# stat
+    # forensics
+# termshark
+    # wireshark in terminal
+# wormhole
+    # send files securly
+
+
+
+# usful notes
+# check package installed
+pacman -Q | grep 'pagage'
+
+# kill application
+pkill 'application_name'
+# force kill
+pkill -9 'application_name'
+# get PID
+ps aux | grep 'application_name'
+kill PID
+# may be easyer to use
+killall 'application_name'
+# also
+htop and btop
+
+# find file with name
+find . -name "file_name" -exec grep -l "pattern" {} \;
+
+
+
+
+
+

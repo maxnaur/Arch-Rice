@@ -1,0 +1,62 @@
+# during install
+ping 8.8.8.8
+timedatectl
+archinstall
+
+
+# AUR
+sudo pacman -S git base-devel less
+mkdir AUR
+cd AUR
+git clone https://aur.archlinux.org/yay.git
+cd 'yay'
+makepkg -sic
+cd
+
+# allow 32 bit
+sudo nano /etc/pacman.conf
+# and uncomment
+# [multilib]
+# Include = /etc/pacman.d/mirrorlist
+
+# fix gpu drivers and install life
+sudo pacman -S nvidia-settings btop firefox steam mandoc prismlauncher spotify-launcher qbittorrent coreutils btop htop mpv python torbrowser-launcher wireshark-qt nmap ntfs-3g discord kolourpaint
+# defults
+yay -S zen-browser-bin brave-bin visual-studio-code-bin thefuck virtualbox-bin pacseek
+# rebuild driver
+sudo mkinitcpio -P
+
+# fonts
+sudo pacman -Syu noto-fonts noto-fonts-emoji
+yay -S ttf-dejavu ttf-liberation cantarell-ttf otf-font-awesome ttf-nerd-fonts-symbols ttf-iosevka nerd-fonts-complete audacity
+fc-cache -fvaudacity
+
+# open vpn
+sudo pacman -S openvpn wireguard-tools systemd-resolvconf proton-vpn-gtk-app proton-vpn-cli
+
+# flatpak
+sudo pacman -S flatpak
+flatpak update
+#flatpak list
+#flatpak uninistall --delete-data 'app'
+# roadblox
+flatpak install sober
+
+# autopsy doesn't work
+
+# ai no longer maintained
+sudo pacman -S npm
+sudo npm install -g @google/gemini-cli
+
+# in games
+__NV_PRIME_RENDER_OFFLOAD=1 __GLX_VENDOR_LIBRARY_NAME=nvidia %command%
+
+# mount drivers
+lsblk
+sudo mkdir /mnt/ntfs-drive
+sudo mount -t ntfs-3g /dev/nvme0n1p2 /mnt/ntfs-drive
+
+pacseek
+libreoffice --headless --convert-to pdf 'file name'
+
+

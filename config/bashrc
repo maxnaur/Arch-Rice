@@ -1,0 +1,72 @@
+# ~/.bashrc
+# reset . ~/.bashrc
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# auto
+alias ls='ls --color=auto'
+alias grep='grep --color=auto'
+#alias rofi='rofi -show run;'
+alias cl='clear'
+
+# directory
+alias ..='cd ..; echo "cd .."'
+alias ...='cd ..; cd .. ; echo "cd ..; cd .."'
+alias hypr='cd ~/.config/hypr/;'
+alias arch='cd ~/Documents/Arch-Rice/;'
+
+# .bashrc
+alias bashrc='nvim ~/.bashrc; source ~/.bashrc'
+alias bashcr='bashrc'
+# grub
+alias grub='sudo nvim /etc/default/grub;'
+
+# terminal app
+alias spotify='spotify_player;'
+alias spotify-player='spotify_player'
+alias sense='arch-sense;'
+alias vim='nvim'
+
+# run terminal app
+export PATH="$HOME/.local/bin:$PATH"
+
+# image display
+icat() {
+  kitten icat "$@"
+}
+
+# image folder display with dellay between images
+icatfolder() {
+  local dir="${1:-$PWD}"
+  local -a files=()
+
+  # input
+  mapfile -t files < <(
+    find "$dir" -type f \( \
+      -iname '*.png' -o -iname '*.jpg' -o -iname '*.jpeg' -o \
+      -iname '*.webp' -o -iname '*.gif' -o -iname '*.bmp' \
+      \) | sort
+  )
+  # ensure input
+  if ((${#files[@]} == 0)); then
+    echo "No images found in: $dir" >&2
+    return 1
+  fi
+
+  # sort
+  files[@] = sort files[@]
+
+  # display
+  echo "Press space for next (q to quit):"
+  local f k
+  for f in "${files[@]}"; do
+    echo "$f"
+    kitten icat "$f"
+
+    read -r -n 1 -p "" k
+    [[ "$k" == "q" ]] && break
+  done
+}
+
+PS1='[\u@\h \W]\$ '

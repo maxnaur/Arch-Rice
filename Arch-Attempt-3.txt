@@ -1,0 +1,547 @@
+# Install 3 NOT IN ORDER but in an order that is more easy to read
+
+
+---- Install ----
+ping 8.8.8.8 -c 10
+timedatectl
+sudo pacman -Sy archlinux-keyring
+archinstall
+
+
+---- All Drivers ----
+# dkms for hyprland
+# drivers should already be installed from archinstall and lib32 will be installed when setting up steam
+# full list of drivers;
+lib32-nvidia-utils 610.43.02-1
+libva-nvidia-driver 0.0.17-1
+linux-firmware-nvidia 20260519-1
+nvidia-open-dkms 610.43.02-2
+nvidia-utils 610.43.02-2
+# check rights
+ls -l /dev/nvidia*
+sudo chmod a+rwx /dev/nvidia_uvm
+
+
+---- Laptop Fans ----
+# I have always had a massive problem with fans, overclocking the cpu and gpu and controlling the lights of the keyboard
+# turns out there is a good reason for that according to
+wiki.archlinux.org/title/Laptop/Acer#Predator
+# Predator Helios 500, 
+# PH517-61 is: SuperIO not supported:
+-- PWM Fan speed cannot be manually set
+-- Cannot read fan speed
+-- Cannot set RGB lighting for keyboard
+-- Cannot turn border lighting around trackpad on and off
+-- Predator quicklaunch keys does not function
+
+# there is a project that recreates pridetor sense but for arch in terminal
+# here are the links to the githubs
+https://github.com/0x7375646F/Linuwu-Sense
+https://github.com/CPT-Dawn/Arch-Sense
+# dependencies 
+sudo pacman -S linux-headers libusb
+# need to install through github so it sets up all the files
+cd ~/AUR/
+git clone https://github.com/0x7375646F/Linuwu-Sense.git
+cd Linuwu-Sense
+make install
+
+yay -S arch-sense
+# remove need for admin
+arch-sense --install-permissions
+restart
+
+# run the thing
+arch-sense
+# if want on boot (not doing that yet)
+sudo systemctl enable --now arch-sense.service
+
+# Conclusion - light control doesn't work, LCD overlay doesn't work but everything else does most importantly the fan speed and the overclocking which means I can try elden ring again (getting an average of 40 frames with lows at 8 during fights)
+# After testing fan speed has 2 modes "auto" and "max".  When the overclock is set to performant in elden ring average 58 frames (prob being limited by the game) with lows of 18.  This is the best performance that can be expected for this leptop
+
+
+---- Boot Loader ----
+# Edit GRUB configuration
+nvim /etc/default/grub
+# nothing is worth changing but updated the style it is written in to make it easier to read
+
+
+---- Install Basic Packets ----
+# past all this
+sudo loadkeys uk
+pacman -S neovim firefox btop git man tldr btop unzip otf-font-awesome vlc openssh
+mkdir AUR
+cd AUR
+git 'https://aur.archlinux.org/yay-bin.git'
+cd yay-bin
+makepkg -si
+cd
+# update (alius yay = yay -Syu)
+yay
+# S - incude pacman packets
+# y - accept
+# u - dont login to the aur
+# a - asumme packets are from aur
+# other thing that can be updated
+flatpak update
+npm install update
+
+
+# fonts and aur
+yay -S pacseek-bin aur-scanner lexend-fonts-git
+# aur checker
+aur-scan system
+#aur-scan check <package-name>
+# visual-studio-bin and brave-origin-bin can be used to gain heightened privileges which isn't great
+
+
+---- Install The Rest of The Apps
+# kde plasma if needed
+sudo pacman -S plasma kde-appkications
+
+# all apps
+sudo pacman -S spotify-player libreoffice-fresh zip unzip flatseal wireshark-qt qbittorrent
+yay -S visual-studio-code-bin zen-browser-bin brave-origin-bin helium-browser-bin vencord-bin sober-bin fastfetch localsend-bin
+
+# steam time
+# allow 32 bit
+sudo nano /etc/pacman.conf
+# and uncomment
+# [multilib]
+# Include = /etc/pacman.d/mirrorlist
+sudo pacman -S lib32-nvidia-utils
+sudo pacman -S steam
+
+# prism is how I run minecraft. there are 2 places it can be taken from
+# dependencies but only if sometimes needed so install
+sudo pacman -S cmake extra-cmake-modules ninja scdoc gamemode vulkan-headers prismlauncher
+# in prism settings. increase memory size. enable dedicated gpu
+# folder ~/.local/share/PrismLauncher/
+
+
+# ---- style files using .config files ----
+# style before config
+# stylus extention (https://catppuccin-userstyles-customizer.uncenter.dev/)
+# font options Monospace (kitty terminal font) for everything else Lexend (from google)
+# https://github.com/orangci/walls-catppuccin-mocha
+
+#go to .config for files and things
+# set up
+cd ~/.config
+
+# discord (vencord)
+# discord css file
+/* macchiato */
+@import url("https://catppuccin.github.io/discord/dist/catppuccin-macchiato.theme.css");
+* { font-family: 'lexend' }
+
+# kitty
+# generate default kitty.conf: ctrl+shift+f2
+nvim ~/.config/kitty/kitty.conf
+# get the theme
+git clone https://github.com/catppuccin/kitty.git ~/Downloads/kitty
+# extract what you want (only need the theme file but other folders are useful)
+# rice file
+# no shell_integration (want it but not working and idk why)
+
+# neovim
+sudo pacman -S ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common ttf-nerd-fonts-symbols-mono
+git clone https://github.com/LazyVim/starter ~/.config/nvim
+rm -rf ~/.config/nvim/.git
+rm ~/.config/nvim/.gitignore
+nvim
+# extentions stored in ~/.local/share/nvim/lazy/catppuccin.nvim/
+# add catppuccin (plugin already installed as part of LazyVim)
+#https://github.com/catppuccin/nvim/tree/main
+--
+nvim ~/.config/nvim/init.lua
+vim.opt.termguicolors = true
+vim.cmd("colorscheme catppuccin")
+--
+nvim ~/.config/nvim/lua/plugins/catppuccin.lua
+return {
+  "catppuccin/nvim",
+  name = "catppuccin",
+  priority = 1000,
+  opts = {
+    flavour = "frappe", -- latte|frappe|macchiato|mocha
+    background = "frappe", -- { light = "frappe", dark = "macchiato" },
+    transparent_background = true,
+  },
+}
+
+# spotify
+# run spotify with "spotify_player"
+mv ~/.config/spotify-player/app.toml ~/app.toml
+git clone https://github.com/catppuccin/spotify-player ~/.config/spotify-player
+mv ~/app.toml ~/.config/spotify-player/app.toml
+sudo nano ~/.config/spotify-player/app.toml
+theme = "Catppuccin-frappe"
+
+# btop
+git clone https://github.com/catppuccin/btop ~/.config/btop
+# then go to setting in btop and sellect frappe
+
+# pacseek (make sure it used the display of kate)
+Transparent = true
+# thats it
+
+# fastfetch
+fastfetch --gen-config
+# coppy and past from me made custom
+#use different config files for different image types lift ascii arts as default
+
+
+# ---- hyprland ----
+# hyprland
+pacman -S libinput-tools hyprland hyprpolkitagent hyprpaper wl-clipboard neovim rofi waybar power-profiles-daemon flameshot lxappearance qt5-wayland qt6-wayland hyprpolkitagent pavucontrol networkmanager rofi-wayland dnsmasq
+yay -S blueberry
+
+# rofi
+mkdir -p ~/.config/rofi
+git clone https://github.com/catppuccin/rofi.git ~/.config/rofi
+# modify rofi to set colour and remove extra shit
+
+# waybar
+mkdir -p ~/.config/waybar
+git clone https://github.com/catppuccin/waybar.git ~/.config/waybar
+cp /etc/xdg/waybar/config.jsonc ~/.config/waybar/
+cp /etc/xdg/waybar/style.css ~/.config/waybar/
+# rice it myself border sorted out with ai
+
+# hyprpaper
+# use https://wiki.hypr.land/Hypr-Ecosystem/hyprpaper/
+# file ~/.config/hypr/hypaper.conf
+# reload > hyprpaper
+
+# hyprland import default from
+# mkdir -p ~/.config/hypr/hyprland.lua
+git clone https://github.com/catppuccin/hyprland ~/.config/hypr/hyprland.lua
+# https://github.com/hyprwm/Hyprland/blob/main/example/hyprland.lua
+# ~/.config/hypr/hyprland.lua
+# not that uk keymap is gb... took 3 hours for me to figure that out
+# rice
+# split the config fles into chuncks
+# touchpad drag_3fg setting does not work
+# while set up hyprland with config files
+# config file shoud automaticly update but if it doesn't
+hyprctl reload
+
+
+# ---- other ----
+# list input devices
+#libinput-tools
+sudo libinput list-devices
+
+# blueberry for bluetooth
+# comes from linux mint gui
+blueberry
+# click waybar bluetooth
+
+# audio management
+pavucontrol
+# right click waybar audio
+
+# flameshot
+# not customised yet
+# SUPER + SHIFT + S
+
+# set KDE application theme
+yay -S qt6ct-kde
+# will use the theme of what you were using on the kde plasma (or edit)
+#~/.config/kdeglobals
+#ColorScheme=NameOfTheProfile
+
+# wayland support qt5-wayland and qt6-wayland
+
+# hyprpolkitagent
+# authentication
+hyprpolkitagent
+
+# network manager
+# hyprltm-net (https://github.com/hyprltm/hyprltm-net)
+# install
+bash <(curl -s https://raw.githubusercontent.com/hyprltm/hyprltm-net/main/setup.sh)
+
+
+## to do (temp here)
+# run spotify from rofi later
+kitten run-shell spotify_player
+
+# monitor 2 opens on workspace 5
+
+# network tool has a light background (started working idk why)
+# dolfin start with breeze-dark
+
+allow_session_lock_restore = false -- need for screen lock (need to set up before uni!)
+
+Notifications - https://wiki.hypr.land/Configuring/Advanced-and-Cool/Notifications/
+
+
+# standardise colours with a gui
+lxappearance
+not working for some reason
+
+
+
+
+---- AI ----
+# gemini (removed free teir so stop using)
+# op 1
+sudo pacman -S gemini-cli
+# op 2
+sudo pacman -S npm
+sudo npm install -g @google/gemini-cli
+# run
+gemini
+
+# ollama
+sudo pacman -S ollama
+# aulter limist
+sudo mkdir /etc/security/limits.d/
+sudo nano /etc/security/limits.d/ollama.conf
+# defaults
+soft nofile 65536
+hard nofile 65536
+soft nproc  4096
+hard nproc  4096
+# run modle
+ollama serve
+# or
+OLLAMA_CONTEXT_LENGTH=16000 ollama serve
+ollama run qwen3.5:9b
+# can run will from (https://insiderllm.com/guides/what-can-you-run-8gb-vram/)
+# normal modle
+Qwen 3.5 9B - default
+Llama 3.1 8B - writing assistant
+Mistral 7B - Fast chat and summarization
+DeepSeek R1 8B - maths
+# smaller modle at high quality
+Qwen 3.5 3B - Fast chat, coding, multilingual
+Qwen 3.5 4B	- still light
+Llama 3.2 3B - Quick Q&A, simple tasks
+Phi-3 Mini (3.8B) - Reasoning, coding (compact)
+
+# docker
+sudo pacman -S docker
+# enable docker
+sudo systemctl enable --now docker
+# verify
+sudo docker run --rm hello-world
+# install ollama (GPU)
+sudo docker run -d --name ollama --gpus all -p 11434:11434 ollama/ollama:latest
+
+# run ai modle with docker
+# start container
+sudo docker start 537e81c4cb4aadf0badb57b29e0f805a0db69da86115d1bc9ec0bd6ca7664773
+# verify
+sudo docker ps
+# start
+sudo docker exec -it 537e81c4cb4a ollama run qwen3.5
+# disable docker
+sudo systemctl stop docker.socket docker.service
+sudo systemctl disable --now docker
+# remove
+sudo docker rm -f ollama
+
+# didn't work fist time with GPU dew to nvidia driver problems. will fix
+
+
+# --- Set up github Arch Notes ----
+# set up github on ~/Arch-Rice to allow easy upload with visual studio code. this is not the best method to do so but is the first method I will try
+# sign into github followed (https://www.tech2geek.net/how-to-install-and-configure-git-on-arch-linux-complete-2026-guide/)
+git config --global user.name "mame"
+git config --global user.email "email@email.com"
+# didn't do but can
+#git config --global init.defaultBranch main
+# default code editor, for easier time code --wait (visual studio code)
+git config --global core.editor "nvim"
+# check config
+git config --list --global
+# settings stored ~/.gitconfig
+# overide .git/config
+
+# SSH key
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# location ~/.ssh/id_ed25519
+# ssh adent with key (just manages ssh keys)
+eval $(ssh-agent -s)
+ssh-add ~/.ssh/id_ed25519
+# get public key
+cat ~/.ssh/id_ed25519.pub
+# with the public key go into github and enter "Settings > SSH and GPG Keys > New SSH Keys"
+# login
+ssh -T git@github.com
+# Success Hi "user"! You've successfully authenticated, but GitHub does not provide shell access.
+
+# set up this GitHub
+git clone git@github.com:username/repository.git
+
+# using github
+# Stage all files
+git add .
+# Commit changes
+git commit -m "Initial commit"
+# Push Changes to Remote
+git push origin main
+# Pull Updates from Remote
+git pull origin main
+# Check Status
+git status
+# View Commit History
+git log --oneline --graph --decorate
+# resset
+rm -rf .git
+# repository can't be more than 2 gigs... I had to many walpapers (over 2 gigs now like 600 megs)
+
+
+# --- Cyber Security ----
+# wireshark
+
+
+# --- Useful bits ----
+# How to uninstall packets with pacman
+pacman -Rsn 'pkg'
+# remove orphaned packages
+pacman -Qdtq | sudo pacman -Rns -
+
+# alius
+nvim ~/.bashrc
+source ~/.bashrc
+
+# mound ntfs
+sudo pacman -Syu ntfs-3g
+lsblk -f
+# if its not real make a mount point
+sudo mkdir -p /mnt/sda1
+# mount
+sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1
+
+# file size of directory
+tree -L 1 -s
+
+# find out running thing
+man 'command'
+tldr 'command'
+
+# clear trash (use root if needed)
+rm -rf ~/.local/share/Trash/*/ 2>/dev/null
+rm -rf ~/.local/share/Trash/files/* ~/.local/share/Trash/info/* 2>/dev/null
+# resset folders (I made mistakes)
+mkdir -p ~/.local/share/Trash ~/.local/share/Trash/files ~/.local/share/Trash/info
+chmod 700 ~/.local/share/Trash ~/.local/share/Trash/info
+chown -R "$USER":"$USER" ~/.local/share/Trash
+
+# ls
+ls -lA # view permition of files
+ls -A # view . files but ignore . and ..
+
+# current directory
+pwd
+
+# view image in terminal
+kitten icat 'image'
+#alius icat and icatfolder
+
+# zip a folder
+zip -r 'file_name.zip' 'directory'
+# zip file
+zip file.zip file
+# unzip
+unzip 'file_name'
+
+
+
+# --- Key binds notes ----
+
+# kitty (with vim keybinds)
+# kitty_mod for everything = control+shift
+# v = paste_from_clipboard
+# s paste_from_selection (middle click)
+#
+# Scroll
+# j = up 1
+# k = down 1
+# up = up page
+# down = down page
+# / = search
+# g = show_last_command_output with less
+#
+# tab
+# t = new tab
+# w = close window
+# right or l or ctrl+tab = tab to right
+# left or h or ctrl+shift+tab = tab to right
+# . = move tab right
+# , = move tab left
+# 1-10 = tab 1-10
+# kitty_mod+alt+t = set_tab_title
+#
+# window (Fat)
+# enter new_window
+# ] or } = next_window
+# [ or { = previous_window
+# ` = move_window_to_top
+# ctrl+alt+ (1-9) = (1-9) window
+# f8 swap_with_window
+#
+# font
+# equal or plus = font_size +2
+# minus = font_size -2.0
+# backspace = reset font_size
+#
+# Miscellaneous
+# f1 = show documentation (cool file website)
+# f3 command palette (show keybinds)
+# f11 or kitty_mod+f11 = toggle_fullscreen
+# u = unicode input (😀)
+# delete clear terminal
+# f5 = load_config_file
+# f6 = debug_config
+
+# hyprland
+# SUPER for everything = Windows
+# Q = terminal
+# E = fileManager
+# R = internet
+# T = bluetooth
+# Super+shift+S = screenshot
+# alt+space = app launcher
+#
+# C = close window
+# V = foloat window
+# J = toggle split
+# P = pseudo??
+# arrows = change focus
+# M = sign out
+#
+# 1-9 = change desktop
+# shift + 1-9 = change focused window to desktop 1-9
+
+# vim
+
+
+
+# --- To Do List ----
+- how do I run discord from rofi
+- run spotify_player and arch-sense from rofi
+- customise flameshot (https://github.com/flameshot-org/flameshot)
+- vertual mechines
+
+- ls (learn everything)
+- terminal file exploror
+- ProtonVPN --https://wiki.archlinux.org/title/ProtonVPN
+
+
+
+# --- UnSuccessful ----
+# ai open odysseus (PewDiePie <3)
+# https://github.com/pewdiepie-archdaemon/odysseus
+yay -S odysseus-ai-git
+# errors not installed
+
+# this can be done properly if using the method on windows "docker-setup-windows.txt"
+
+
+
+

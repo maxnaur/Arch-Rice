@@ -33,6 +33,7 @@ button {
 #workspaces,
 #clock,
 #battery,
+#backlight,
 #cpu,
 #memory,
 #temperature,
@@ -82,6 +83,10 @@ button {
   animation-timing-function: steps(12);
   animation-iteration-count: infinite;
   animation-direction: alternate;
+}
+
+#backlight {
+  color: @lavender
 }
 
 #cpu {

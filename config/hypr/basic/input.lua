@@ -2,6 +2,9 @@
 ---- INPUT ----
 ---------------
 
+-- input devices
+-- hyprctl devices
+
 -- keybord and mouse default
 hl.config({
 	input = {

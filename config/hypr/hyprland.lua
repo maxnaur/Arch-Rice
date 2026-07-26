@@ -6,14 +6,6 @@ require("basic/monitors")
 ---- AutoStart ----
 require("basic/autostart")
 
--------------------------------
----- ENVIRONMENT VARIABLES ----
--------------------------------
-
--- See https://wiki.hypr.land/Configuring/Advanced-and-Cool/Environment-variables/
--- /usr/share/icons/
--- hl.env("GTK_THEME", "/theme/breeze-dark") -- Adwaita")
-
 -----------------------
 ----- PERMISSIONS -----
 -----------------------

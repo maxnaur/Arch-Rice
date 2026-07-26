@@ -12,11 +12,11 @@ archinstall
 # dkms for hyprland
 # drivers should already be installed from archinstall and lib32 will be installed when setting up steam
 # full list of drivers;
-lib32-nvidia-utils 610.43.02-1
-libva-nvidia-driver 0.0.17-1
-linux-firmware-nvidia 20260519-1
-nvidia-open-dkms 610.43.02-2
-nvidia-utils 610.43.02-2
+lib32-nvidia-utils
+libva-nvidia-driver
+linux-firmware-nvidia
+nvidia-open-dkms
+nvidia-utils
 # check rights
 ls -l /dev/nvidia*
 sudo chmod a+rwx /dev/nvidia_uvm
@@ -69,7 +69,7 @@ nvim /etc/default/grub
 ---- Install Basic Packets ----
 # past all this
 sudo loadkeys uk
-pacman -S neovim firefox btop git man tldr btop unzip otf-font-awesome vlc openssh
+pacman -S neovim firefox btop git man tldr btop unzip otf-font-awesome`` openssh
 mkdir AUR
 cd AUR
 git 'https://aur.archlinux.org/yay-bin.git'
@@ -100,8 +100,9 @@ aur-scan system
 sudo pacman -S plasma kde-appkications
 
 # all apps
-sudo pacman -S spotify-player libreoffice-fresh zip unzip flatseal wireshark-qt qbittorrent
-yay -S visual-studio-code-bin zen-browser-bin brave-origin-bin helium-browser-bin vencord-bin sober-bin fastfetch localsend-bin
+sudo pacman -S spotify-player libreoffice-fresh zip unzip flatseal wireshark-qt qbittorrent gwenview pmv flatpak
+yay -S visual-studio-code-bin zen-browser-bin brave-bin helium-browser-bin vesktop-bin fastfetch localsend-bin nsis-untgz-bin
+flatpak install com.protonvpn.www org.vinegarhq.Sober
 
 # steam time
 # allow 32 bit
@@ -129,11 +130,24 @@ sudo pacman -S cmake extra-cmake-modules ninja scdoc gamemode vulkan-headers pri
 # set up
 cd ~/.config
 
-# discord (vencord)
+# discord (vesktop-bin)
 # discord css file
 /* macchiato */
 @import url("https://catppuccin.github.io/discord/dist/catppuccin-macchiato.theme.css");
 * { font-family: 'lexend' }
+# would freeze when run so use this command instead
+#vesktop --disable-features=VaapiVideoDecoder,VaapiVideoEncoder --use-gl=egl
+# by default it can't run with 2 gpu's (Intel integrated and Nvidia like I want). not the problem
+# test
+#vesktop 2>&1 | tee /tmp/vesktop.log
+# check D bus
+systemctl --user status dbus
+# needes
+# notification manager
+sudo pacman -S libnotify
+# amd use integrated graphics
+__NV_PRIME_RENDER_OFFLOAD=0 __GLX_VENDOR_LIBRARY_NAME=mesa DRI_PRIME=0 vesktop
+# problem was I needed dunst notification manager (customise in hyprland)
 
 # kitty
 # generate default kitty.conf: ctrl+shift+f2
@@ -143,6 +157,7 @@ git clone https://github.com/catppuccin/kitty.git ~/Downloads/kitty
 # extract what you want (only need the theme file but other folders are useful)
 # rice file
 # no shell_integration (want it but not working and idk why)
+# kde plasma won't use the kitty config file :(
 
 # neovim
 sudo pacman -S ttf-nerd-fonts-symbols ttf-nerd-fonts-symbols-common ttf-nerd-fonts-symbols-mono
@@ -194,16 +209,33 @@ fastfetch --gen-config
 
 # ---- hyprland ----
 # hyprland
-pacman -S libinput-tools hyprland hyprpolkitagent hyprpaper wl-clipboard neovim rofi waybar power-profiles-daemon flameshot lxappearance qt5-wayland qt6-wayland hyprpolkitagent pavucontrol networkmanager rofi-wayland dnsmasq
+pacman -S libinput-tools hyprland hyprpolkitagent hyprpaper wl-clipboard neovim rofi waybar brightnessctl power-profiles-daemon flameshot lxappearance qt5-wayland qt6-wayland hyprpolkitagent pavucontrol networkmanager rofi-wayland dnsmasq alacritty ly gwenview dunst hyprlock
 yay -S blueberry
 
 # rofi
-mkdir -p ~/.config/rofi
+mkdir ~/.config/rofi
 git clone https://github.com/catppuccin/rofi.git ~/.config/rofi
-# modify rofi to set colour and remove extra shit
+# get default config
+#rofi -dump-config > ~/.config/rofi/config.rasi
+# modify rofi to set colour and remove extra things
+# rofi can't boot terminal gui's apps
+# rofi -show drun
+# make extra running options
+#
+# shared logins stored here:
+#~/.local/share/applications/rofi-aliases.desktop
+# I' storing my added options here:
+#~/.config/rofi/alias/*
+# before adding it to:
+#~/.local/share/applications/
+#
+# remove items from the rofi list
+# by adding bellow to .dsktop file
+#Hidden=true
+#NoDisplay=true
 
 # waybar
-mkdir -p ~/.config/waybar
+mkdir ~/.config/waybar
 git clone https://github.com/catppuccin/waybar.git ~/.config/waybar
 cp /etc/xdg/waybar/config.jsonc ~/.config/waybar/
 cp /etc/xdg/waybar/style.css ~/.config/waybar/
@@ -215,7 +247,7 @@ cp /etc/xdg/waybar/style.css ~/.config/waybar/
 # reload > hyprpaper
 
 # hyprland import default from
-# mkdir -p ~/.config/hypr/hyprland.lua
+mkdir ~/.config/hypr/
 git clone https://github.com/catppuccin/hyprland ~/.config/hypr/hyprland.lua
 # https://github.com/hyprwm/Hyprland/blob/main/example/hyprland.lua
 # ~/.config/hypr/hyprland.lua
@@ -226,7 +258,6 @@ git clone https://github.com/catppuccin/hyprland ~/.config/hypr/hyprland.lua
 # while set up hyprland with config files
 # config file shoud automaticly update but if it doesn't
 hyprctl reload
-
 
 # ---- other ----
 # list input devices
@@ -243,7 +274,7 @@ pavucontrol
 # right click waybar audio
 
 # flameshot
-# not customised yet
+# can't really be customised
 # SUPER + SHIFT + S
 
 # set KDE application theme
@@ -252,10 +283,13 @@ yay -S qt6ct-kde
 #~/.config/kdeglobals
 #ColorScheme=NameOfTheProfile
 
-# wayland support qt5-wayland and qt6-wayland
+# standardise gnome gui
+lxappearance
 
-# hyprpolkitagent
-# authentication
+# wayland support
+#qt5-wayland and qt6-wayland
+
+# authentication hyprpolkitagent
 hyprpolkitagent
 
 # network manager
@@ -263,25 +297,64 @@ hyprpolkitagent
 # install
 bash <(curl -s https://raw.githubusercontent.com/hyprltm/hyprltm-net/main/setup.sh)
 
+# notification manager (needed for vesktop to not crash after 5 mins)
+dunst
+# config from https://github.com/catppuccin/dunst
+# standard thing from before
 
-## to do (temp here)
-# run spotify from rofi later
-kitten run-shell spotify_player
+# image viewer (kde)
+gwenview
 
-# monitor 2 opens on workspace 5
+# video (kde)
+pmv
+#mpv media payer
 
-# network tool has a light background (started working idk why)
-# dolfin start with breeze-dark
+# paint
+kolourpaint
 
-allow_session_lock_restore = false -- need for screen lock (need to set up before uni!)
+# lock screan
+hyrlock
+# .config/hypr/hyrlock.conf
 
-Notifications - https://wiki.hypr.land/Configuring/Advanced-and-Cool/Notifications/
 
 
-# standardise colours with a gui
-lxappearance
-not working for some reason
+# ---- Display Manager (system login) ----
+# login screen, terminal based ly
+ly
+# set up using:
+#https://wiki.archlinux.org/title/Ly
+# enable ly@ttyX.service, then disable getty@ttyX.service where X stands for a number from 1 to 6 (for me it is 1)
+systemctl status getty@tty1.service
+sudo systemctl enable ly@tty1.service
+systemctl disable getty@tty1.service
+# remove plasma display manager
+sudo pacman -Rns sddm-kcm sddm
+# user in
+~/.config/ly
+# system in
+/etc/ly/config.ini
 
+
+
+---- Fixing Things ----
+# change screen brightness
+#brightnessctl
+# not updating
+sudo vim /etc/default/grub
+sudo grub-mkconfig -o /boot/grub/grub.cfg
+trying in order:
+  acpi_backlight=vendor
+  acpi_backlight=video
+  acpi_backlight=native
+Example: GRUB_CMDLINE_LINUX_DEFAULT="quiet splash acpi_backlight=vendor"
+# the real problem is "[drm] Skipping intel_backlight registration"
+# needs the line:
+  i915.enable_dpcd_backlight=1
+# do I know what this means... kind of
+# also needs acpi_backlight=native
+# this is the final line
+GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 splash quiet i915.enable_dpcd_backlight=1 acpi_backlight=native"
+# leaving it there for now but still unable to change brightness on external monitors
 
 
 
@@ -344,8 +417,17 @@ sudo systemctl disable --now docker
 # remove
 sudo docker rm -f ollama
 
-# didn't work fist time with GPU dew to nvidia driver problems. will fix
+# Didn't work fist time with GPU dew to nvidia driver problems.  Will not fix as I don't care that much and have given up with this idea
 
+# want to look through 70000 unread emails to sort through them all
+# olama install clawde code
+# use gemini 4
+# undo run
+sudo systemctl start ollama
+# run the actual thing
+ollama
+# ran out of room...
+# not working.  Gave up and uninstalled
 
 # --- Set up github Arch Notes ----
 # set up github on ~/Arch-Rice to allow easy upload with visual studio code. this is not the best method to do so but is the first method I will try
@@ -450,6 +532,22 @@ zip file.zip file
 # unzip
 unzip 'file_name'
 
+# unzip tgz file
+# create a .tgz file
+tar -xvzf
+# extract file
+tar -xvzf 'file.tgz'
+
+# talk kill
+# list all active tasks
+ps aux
+# kill task by name
+pkill
+# example
+ps aux | grep spotify
+
+# ui view space taken by files
+sudo ncdu /
 
 
 # --- Key binds notes ----
@@ -523,8 +621,8 @@ unzip 'file_name'
 
 
 # --- To Do List ----
-- how do I run discord from rofi
-- run spotify_player and arch-sense from rofi
+- pacman update list
+- dnd spells not need so many concentration
 - customise flameshot (https://github.com/flameshot-org/flameshot)
 - vertual mechines
 
@@ -542,6 +640,11 @@ yay -S odysseus-ai-git
 
 # this can be done properly if using the method on windows "docker-setup-windows.txt"
 
+
+# --- Fun Thing I Learned ---
+# the file /proc/kcore contained 128 TiB of data.
+# I don't have that much storage so I had a look and the file is only 112 lines
+# turns out it is a vertual file that is just a memory dump
 
 
 

@@ -1,0 +1,38 @@
+1784061989539	Sync.LogManager	DEBUG	Flushing file log
+1784061989542	Sync.LogManager	DEBUG	Log cleanup threshold time: 1783197989542
+1784061989543	Sync.LogManager	DEBUG	Done deleting files.
+1784061990277	Sync.SyncScheduler	DEBUG	Woke from sleep.
+1784061990277	Sync.SyncScheduler	DEBUG	Online, will sync in 2s.
+1784061990277	Sync.SyncScheduler	DEBUG	Next sync in 2000 ms. (why=wake_notification)
+1784061990278	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784061992278	Sync.Service	DEBUG	User-Agent: Zen/1.21.6b (Linux x86_64) FxSync/1.154.0.20260708113753.desktop
+1784061992278	Sync.Service	INFO	Starting sync at 2026-07-14 21:46:32 in browser session Zs1Te6nelC92
+1784061992278	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1784061992280	Sync.Status	INFO	Resetting Status.
+1784061992280	Sync.Status	DEBUG	Status.service: error.sync.failed => success.status_ok
+1784061992281	FirefoxAccounts	TRACE	not checking freshness of profile as it remains recent
+1784061992281	Sync.SyncAuthManager	INFO	Getting sync key
+1784061992281	FirefoxAccounts	DEBUG	getOAuthToken enter
+1784061992281	FirefoxAccounts	TRACE	getCachedToken returning cached token
+1784061992281	FirefoxAccounts	DEBUG	getOAuthToken returning a cached token
+1784061992281	Sync.SyncAuthManager	INFO	Getting a sync token from: https://token.services.mozilla.com/1.0/sync/1.5
+1784061992281	Sync.SyncAuthManager	DEBUG	Getting a token using OAuth
+1784061992281	Services.Common.TokenServerClient	DEBUG	Beginning OAuth token exchange: https://token.services.mozilla.com/1.0/sync/1.5
+1784061992281	Services.Common.RESTRequest	DEBUG	GET request to https://token.services.mozilla.com/1.0/sync/1.5
+1784061992282	Services.Common.RESTRequest	DEBUG	GET https://token.services.mozilla.com/1.0/sync/1.5 failed: 2152398878 - NS_ERROR_UNKNOWN_HOST
+1784061992282	Sync.SyncAuthManager	ERROR	Non-authentication error in _fetchTokenForUser: TokenServerClientNetworkError({"error":{}})(resource://services-common/tokenserverclient.sys.mjs:28:36) JS Stack trace: TokenServerClientNetworkError@tokenserverclient.sys.mjs:51:16
+_tokenServerExchangeRequest@tokenserverclient.sys.mjs:235:13
+1784061992282	Sync.Status	DEBUG	Status.login: success.login => error.login.reason.network
+1784061992282	Sync.Status	DEBUG	Status.service: success.status_ok => error.login.failed
+1784061992282	FirefoxAccounts	TRACE	Getting command keys: https://identity.mozilla.com/cmd/open-uri
+1784061992282	Sync.SyncAuthManager	ERROR	Failed to fetch a token for authentication: TokenServerClientNetworkError({"error":{}})(resource://services-common/tokenserverclient.sys.mjs:28:36) JS Stack trace: TokenServerClientNetworkError@tokenserverclient.sys.mjs:51:16
+_tokenServerExchangeRequest@tokenserverclient.sys.mjs:235:13
+1784061992282	FirefoxAccounts	TRACE	not checking freshness of profile as it remains recent
+1784061992282	FirefoxAccounts	TRACE	Getting command keys: https://identity.mozilla.com/cmd/close-uri/v1
+1784061992283	Sync.Resource	WARN	GET request to https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/info/collections failed: [Exception... "The lookup of the hostname failed"  nsresult: "0x804b001e (NS_ERROR_UNKNOWN_HOST)"  location: "<unknown>"  data: no] No traceback available
+1784061992283	Sync.Status	DEBUG	Status.sync: success.sync => error.login.reason.network
+1784061992283	Sync.Status	DEBUG	Status.service: error.login.failed => error.sync.failed
+1784061992283	Sync.ErrorHandler	ERROR	Sync encountered an error: [Exception... "The lookup of the hostname failed"  nsresult: "0x804b001e (NS_ERROR_UNKNOWN_HOST)"  location: "<unknown>"  data: no] No traceback available
+1784061992284	Sync.SyncScheduler	DEBUG	Next sync in 600000 ms. (why=reschedule)
+1784061992284	Sync.Telemetry	INFO	Early submission of sync telemetry due to changed IDs/NodeType
+1784061992285	Sync.Service	DEBUG	Exception calling anonymous function: [Exception... "The lookup of the hostname failed"  nsresult: "0x804b001e (NS_ERROR_UNKNOWN_HOST)"  location: "<unknown>"  data: no] No traceback available

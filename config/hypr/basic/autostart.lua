@@ -10,8 +10,8 @@
 hl.on("hyprland.start", function()
 	--hl.exec_cmd(terminal)
 	hl.exec_cmd("hyprctl setcursor breeze_cursors 24")
-	hl.exec_cmd("nm-applet")
+	hl.exec_cmd("brightnessctl -qd intel_backlight set 70%")
+	hl.exec_cmd("systemctl --user start hyprpolkitagent")
+	hl.exec_cmd("nm-applet & dunst")
 	hl.exec_cmd("waybar & hyprpaper")
 end)
---
--- need to add bluetooth, wallpapers, notifications and discord

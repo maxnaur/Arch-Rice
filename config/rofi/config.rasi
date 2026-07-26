@@ -31,8 +31,8 @@
   normal-foreground:           @foreground;
   alternate-urgent-foreground: @red;
   alternate-active-foreground: @blue;
-
 }
+
 element {
     padding: 1px ;
     cursor:  pointer;
@@ -171,4 +171,29 @@ textbox-prompt-colon {
     expand:     false;
     str:        ":";
     text-color: inherit;
+}
+
+
+configuration {
+  modes: "window,run"; // drun,ssh
+  font: "lexend 12";
+/*	location: 0;*/
+/*	yoffset: 0;*/
+/*	xoffset: 0;*/
+/*	fixed-num-lines: true;*/
+  show-icons: true;
+/*	drun-match-fields: "name,generic,exec,categories,keywords";*/
+/*	drun-categories: ;*/
+/*	drun-exclude-categories: ;*/
+/*	drun-show-actions: false;*/
+/*	drun-display-format: "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";*/
+/*	drun-url-launcher: "xdg-open";*/
+  disable-history: true;
+/*	ignored-prefixes: "";*/
+  sort: true;
+  sorting-method: "normal";
+/*	case-sensitive: false;*/
+/*	case-smart: false;*/
+/*	cycle: true;*/
+  max-history-size: 25;
 }

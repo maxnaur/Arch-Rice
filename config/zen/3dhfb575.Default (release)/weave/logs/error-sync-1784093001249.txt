@@ -1,0 +1,31 @@
+1784091750582	Sync.SyncScheduler	DEBUG	Next sync in 600000 ms. (why=schedule)
+1784091876024	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784091879124	Sync.SyncScheduler	DEBUG	Going to sleep, doing a quick sync.
+1784091879124	Sync.Service	DEBUG	User-Agent: Zen/1.21.6b (Linux x86_64) FxSync/1.154.0.20260708113753.desktop
+1784091879124	Sync.Service	INFO	Starting sync at 2026-07-15 06:04:39 in browser session Zs1Te6nelC92
+1784091879124	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1784091879125	Sync.Status	INFO	Resetting Status.
+1784091879125	Sync.Status	DEBUG	Status.service: success.status_ok => success.status_ok
+1784091879126	FirefoxAccounts	DEBUG	FxAccountsProfileClient: Requested profile
+1784091879126	FirefoxAccounts	DEBUG	getOAuthToken enter
+1784091879126	FirefoxAccounts	TRACE	getCachedToken returning cached token
+1784091879126	FirefoxAccounts	DEBUG	getOAuthToken returning a cached token
+1784091879126	Services.Common.RESTRequest	DEBUG	GET request to https://profile.accounts.firefox.com/v1/profile
+1784091880218	Sync.SyncScheduler	DEBUG	Network link status changed to "down". Offline?: false
+1784091880218	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1784091880219	Sync.SyncScheduler	DEBUG	Next sync in 600000 ms. (why=schedule)
+1784091880220	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784092982236	Sync.SyncScheduler	DEBUG	Woke from sleep.
+1784092982236	Sync.SyncScheduler	DEBUG	Online, will sync in 2s.
+1784092982236	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784092987813	Sync.SyncScheduler	DEBUG	Network link status changed to "up". Offline?: false
+1784092987813	Sync.SyncScheduler	DEBUG	Network link looks up. Syncing.
+1784092987815	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784092988818	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784092990402	Sync.SyncScheduler	DEBUG	Network link status changed to "changed". Offline?: false
+1784093001247	Services.Common.RESTRequest	DEBUG	GET https://profile.accounts.firefox.com/v1/profile failed: 2147500036 - NS_ERROR_ABORT
+1784093001247	FirefoxAccounts	ERROR	Background refresh of profile failed: {"name":"FxAccountsProfileClientError","code":null,"errno":998,"error":"NETWORK_ERROR","message":"[Exception... \"NS_ERROR_ABORT\"  nsresult: \"0x80004004 (NS_ERROR_ABORT)\"  location: \"JS frame :: resource://services-common/rest.sys.mjs :: onStopRequest :: line 478\"  data: no]"}
+1784093001248	Sync.Resource	WARN	GET request to https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/info/collections failed: [Exception... "Abort"  nsresult: "0x80004004 (NS_ERROR_ABORT)"  location: "<unknown>"  data: no] No traceback available
+1784093001248	Sync.ErrorHandler	ERROR	Sync encountered an error: [Exception... "Abort"  nsresult: "0x80004004 (NS_ERROR_ABORT)"  location: "<unknown>"  data: no] No traceback available
+1784093001248	Sync.SyncScheduler	DEBUG	Next sync in 600000 ms. (why=reschedule)
+1784093001249	Sync.Service	DEBUG	Exception calling anonymous function: [Exception... "Abort"  nsresult: "0x80004004 (NS_ERROR_ABORT)"  location: "<unknown>"  data: no] No traceback available

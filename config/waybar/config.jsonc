@@ -9,13 +9,15 @@
   "modules-left": [
       "hyprland/workspaces",
   ],
+      //"backlight",
   "modules-center": [
-      "clock"
+      "clock",
   ],
   "modules-right": [
-      "wireplumber",
+      "pulseaudio#output",
       "pulseaudio#input",
       "bluetooth",
+      "backlight",
       "network",
       "cpu",
       "memory",
@@ -23,7 +25,7 @@
       "battery",
       "tray"
   ],
-    //"pulseaudio#output",
+    //"wireplumber",
   "hyprland/workspaces": {
     "format": "{name}",
     "on-click": "activate",
@@ -32,21 +34,31 @@
   },
   "clock": {
     "timezone": "Europe/London",
+    "format": "{:%I:%M}",
+    "format-alt": "{:%d-%m}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-    "format-alt": "{:%d-%m}"
+  },
+  "backlight": {
+    // "device": "acpi_video1",
+    "device": "intel_backlight",
+    "format": "{percent}% {icon}",
+    "format-icons": ["", "", "", "", "", "", "", "", ""],
+    "on-scroll-up": "brightnessctl -qd intel_backlight set +4%",
+    "on-scroll-down": "brightnessctl -qd intel_backlight set 4%- --min 0",
   },
   "cpu": {
     "format": "{usage}% ",
-    "tooltip": false
+    "tooltip": false,
   },
   "memory": {
-    "format": "{}% "
+    "format": "{}% ",
   },
   "temperature": {
     // "thermal-zone": 2,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
     "critical-threshold": 90,
     "format": "{temperatureC}°C {icon}",
+    "format-alt": "{icon}",
     "format-icons": ["", "", "", "", ""]
   },
   "battery": {
@@ -68,7 +80,7 @@
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
     // interface
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "on-click-right": "hyprltm-net",
+    "on-click-right": "~/.local/bin/hyprltm-net",
   },
   "bluetooth": {
     "format": "",
@@ -80,11 +92,21 @@
     "on-click": "blueberry",
     "on-click-right": "blueberry",
   },
+  "pulseaudio#input": {
+    "format": "{format_source}",
+    "format-source": "{volume}% ",
+    "format-source-muted": "󰍭",
+    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
+    "on-click-right": "pavucontrol",
+    "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%",
+    "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
+    "on-click-right": "pavucontrol",
+  },
   "pulseaudio#output": {
     // "scroll-step": 1, // %, can be a float
     "format": "{volume}% {icon}",
     "format-bluetooth": "{volume}% {icon} ",
-    "format-bluetooth-muted": "0 {icon} ",
+    "format-bluetooth-muted": "{icon} ",
     "format-muted": "󰍭",
     "format-icons": {
         "headphone": "",
@@ -98,16 +120,6 @@
     "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
     "on-click-right": "pavucontrol",
   },
-  "pulseaudio#input": {
-    "format": "{format_source}",
-    "format-source": "{volume}% ",
-    "format-source-muted": "󰍭",
-    "on-click": "pactl set-source-mute @DEFAULT_SOURCE@ toggle",
-    "on-click-right": "pavucontrol",
-    "on-scroll-up": "pactl set-source-volume @DEFAULT_SOURCE@ +1%",
-    "on-scroll-down": "pactl set-source-volume @DEFAULT_SOURCE@ -1%",
-    "on-click-right": "pavucontrol",
-  },
   "wireplumber": {
     "format": "{volume}% {icon}",
     "format-muted": "󰖁",
@@ -115,8 +127,7 @@
     "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
     "on-click-right": "pavucontrol",
     "on-scroll-up": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-",
-    "on-click-right": "pavucontrol",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 1%-"
   },
   "tray": {
     // "icon-size": 21,

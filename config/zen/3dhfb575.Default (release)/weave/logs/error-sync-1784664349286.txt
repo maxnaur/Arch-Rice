@@ -1,0 +1,38 @@
+1784660748636	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms. (why=schedule)
+1784664348637	Sync.Service	DEBUG	User-Agent: Zen/1.21.8b (Linux x86_64) FxSync/1.154.0.20260716083326.desktop
+1784664348637	Sync.Service	INFO	Starting sync at 2026-07-21 21:05:48 in browser session z0MttO41B6Z0
+1784664348637	Sync.SyncScheduler	DEBUG	Clearing sync triggers and the global score.
+1784664348641	Sync.Status	INFO	Resetting Status.
+1784664348641	Sync.Status	DEBUG	Status.service: success.status_ok => success.status_ok
+1784664348642	FirefoxAccounts	DEBUG	FxAccountsProfileClient: Requested profile
+1784664348642	FirefoxAccounts	DEBUG	getOAuthToken enter
+1784664348643	FirefoxAccounts	TRACE	getCachedToken returning cached token
+1784664348643	FirefoxAccounts	DEBUG	getOAuthToken returning a cached token
+1784664348643	Services.Common.RESTRequest	DEBUG	GET request to https://profile.accounts.firefox.com/v1/profile
+1784664348856	Services.Common.RESTRequest	DEBUG	GET https://profile.accounts.firefox.com/v1/profile 304
+1784664348858	Sync.Resource	DEBUG	GET success 200 https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/info/collections
+1784664348858	Sync.Service	DEBUG	Fetching server configuration: https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/info/configuration
+1784664348859	FirefoxAccounts	TRACE	not checking freshness of profile as it remains recent
+1784664349061	Sync.Resource	DEBUG	GET success 200 https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/info/configuration
+1784664349062	Sync.Service	DEBUG	Fetching global metadata record
+1784664349062	Sync.Service	DEBUG	Weave Version: 1.154.0 Local Storage: 5 Remote Storage: 5
+1784664349062	Sync.Service	DEBUG	Fetching and verifying -- or generating -- symmetric keys.
+1784664349062	Sync.Service	INFO	Testing info/collections: {"clients":1784659454.62,"extension-storage":1784650409.88,"bookmarks":1784511521.87,"addons":1783943960.04,"prefs":1784625364.46,"crypto":1768310336.62,"meta":1781252110.55}
+1784664349062	Sync.CollectionKeyManager	INFO	Testing for updateNeeded. Last modified: 1768310336.62
+1784664349062	Sync.Synchronizer	DEBUG	Refreshing client list.
+1784664349062	Sync.Engine.Clients	DEBUG	Resetting clients last sync time
+1784664349063	FirefoxAccounts	TRACE	not checking freshness of profile as it remains recent
+1784664349266	Sync.Collection	DEBUG	GET fail 401 https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/storage/clients?full=1&limit=1000
+1784664349266	Sync.Collection	WARN	GET request to https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/storage/clients?full=1&limit=1000 failed with status 401
+1784664349267	Sync.Service	INFO	Logging out
+1784664349267	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms. (why=schedule)
+1784664349268	Sync.ErrorHandler	INFO	Got 401 response; resetting clusterURL.
+1784664349268	Sync.ErrorHandler	DEBUG	New mid-sync 401 failure. Making a note.
+1784664349268	Sync.ErrorHandler	INFO	Attempting to schedule another sync.
+1784664349268	Sync.Status	DEBUG	Status for engine clients: error.engine.reason.record_download_fail
+1784664349268	Sync.Status	DEBUG	Status.service: success.status_ok => error.sync.failed_partial
+1784664349268	Sync.ErrorHandler	DEBUG	clients failed: {"data":"0","url":"https://sync-1-us-west1-g.sync.services.mozilla.com/1.5/279800990/storage/clients?full=1&limit=1000","status":401,"success":false,"headers":{"accept-ranges":"bytes","content-length":"1","content-type":"application/json","date":"Tue, 21 Jul 2026 20:05:49 GMT","server":"nginx/1.22.0","vary":"Origin, Access-Control-Request-Method, Access-Control-Request-Headers","via":"1.1 google, 1.1 varnish","x-cache":"MISS","x-cache-hits":"0","x-firefox-spdy":"h2","x-served-by":"cache-lcy-eglc8600064-LCY","x-timer":"S1784664349.067120,VS0,VE139","x-weave-timestamp":"1784664349.13"},"obj":0,"failureCode":"error.engine.reason.record_download_fail"}
+1784664349269	Sync.Synchronizer	WARN	Client engine sync failed. Aborting.
+1784664349269	Sync.ErrorHandler	ERROR	Some engines did not sync correctly.
+1784664349269	Sync.SyncScheduler	DEBUG	Next sync in 3600000 ms. (why=schedule)
+1784664349269	Sync.Telemetry	INFO	Early submission of sync telemetry due to changed IDs/NodeType

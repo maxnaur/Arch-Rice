@@ -474,6 +474,8 @@ git status
 git log --oneline --graph --decorate
 # resset
 rm -rf .git
+# remove item (like discord api key (who would have that as a problem 🙄))
+git rm -r --cached .gitignore
 # repository can't be more than 2 gigs... I had to many walpapers (over 2 gigs now like 600 megs)
 
 

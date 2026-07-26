@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Spotify
+Comment=Run spotify_player in terminal
+Exec=kitty sh -lc 'spotify_player'
+Icon=/home/max/.config/rofi/alias/spotify.svg
+Terminal=false
+Categories=Network;

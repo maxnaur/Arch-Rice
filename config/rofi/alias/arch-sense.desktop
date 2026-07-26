@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=Arch-Sense (preditor sense)
+Comment=Run arch-sense in terminal
+Exec=kitty sh -lc 'arch-sense'
+Icon=/home/max/.config/rofi/alias/predatorsense-64.png
+Terminal=false

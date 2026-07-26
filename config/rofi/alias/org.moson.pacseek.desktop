@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Pacseek
+Comment=Run pacseek in terminal
+Exec=kitty sh -lc 'pacseek'
+Icon=/usr/share/icons/hicolor/256x256/apps/pacseek.png
+Terminal=false
+Categories=Network;
+Keywords=terminal;package;

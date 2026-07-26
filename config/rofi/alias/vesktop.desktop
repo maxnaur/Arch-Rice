@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Discord (Vesktop)
+Exec=bash -lc '__NV_PRIME_RENDER_OFFLOAD=0 __GLX_VENDOR_LIBRARY_NAME=mesa DRI_PRIME=0 vesktop'
+Terminal=false
+Type=Application
+Icon=vesktop
+StartupWMClass=vesktop
+GenericName=Internet Messenger
+Categories=Network;
+Keywords=discord;vencord;electron;chat;
+MimeType=x-scheme-handler/discord;
+Comment=Vesktop is a custom Discord desktop app

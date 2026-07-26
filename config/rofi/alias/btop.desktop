@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Btop
+Comment=Run btop in terminal
+Exec=kitty sh -lc 'btop'
+Icon=/usr/share/icons/hicolor/scalable/apps/btop.svg
+Terminal=false
+Categories=System;Monitor;ConsoleOnly;

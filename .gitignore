@@ -1,5 +1,4 @@
-config/*
-!/config/vesktop/
-!/config/discord/
-!/config/zen/
-!/config/BraveSoftware/
+config/vesktop/
+config/discord/
+config/zen/
+config/BraveSoftware/

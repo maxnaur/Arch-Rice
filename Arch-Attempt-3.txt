@@ -316,6 +316,11 @@ kolourpaint
 hyrlock
 # .config/hypr/hyrlock.conf
 
+# file manager TUI
+# ranger is vim inspired so should be easy?
+# have for later after learning vim (so far just got the basics)
+sudo pacman -S ranger
+
 
 
 # ---- Display Manager (system login) ----
@@ -625,7 +630,6 @@ sudo ncdu /
 # --- To Do List ----
 - pacman update list
 - dnd spells not need so many concentration
-- customise flameshot (https://github.com/flameshot-org/flameshot)
 - vertual mechines
 
 - ls (learn everything)

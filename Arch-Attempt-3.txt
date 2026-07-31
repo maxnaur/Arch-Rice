@@ -206,11 +206,14 @@ fastfetch --gen-config
 # coppy and past from me made custom
 #use different config files for different image types lift ascii arts as default
 
+# qbittorrent
+#catppuccin
+
 
 # ---- hyprland ----
 # hyprland
 pacman -S libinput-tools hyprland hyprpolkitagent hyprpaper wl-clipboard neovim rofi waybar brightnessctl power-profiles-daemon flameshot lxappearance qt5-wayland qt6-wayland hyprpolkitagent pavucontrol networkmanager rofi-wayland dnsmasq alacritty ly gwenview dunst hyprlock
-yay -S blueberry
+yay -S blueberry slime
 
 # rofi
 mkdir ~/.config/rofi
@@ -312,6 +315,9 @@ pmv
 # paint
 kolourpaint
 
+# emoji selector XFCE
+smile
+
 # lock screan
 hyrlock
 # .config/hypr/hyrlock.conf
@@ -320,6 +326,13 @@ hyrlock
 # ranger is vim inspired so should be easy?
 # have for later after learning vim (so far just got the basics)
 sudo pacman -S ranger
+
+
+
+
+# --- Cyber Security ----
+# wireshark
+
 
 
 
@@ -484,9 +497,6 @@ git rm -r --cached .gitignore
 # repository can't be more than 2 gigs... I had to many walpapers (over 2 gigs now like 600 megs)
 
 
-# --- Cyber Security ----
-# wireshark
-
 
 # --- Useful bits ----
 # How to uninstall packets with pacman
@@ -557,6 +567,7 @@ ps aux | grep spotify
 sudo ncdu /
 
 
+
 # --- Key binds notes ----
 
 # kitty (with vim keybinds)
@@ -605,36 +616,76 @@ sudo ncdu /
 # f6 = debug_config
 
 # hyprland
-# SUPER for everything = Windows
-# Q = terminal
-# E = fileManager
-# R = internet
-# T = bluetooth
-# Super+shift+S = screenshot
-# alt+space = app launcher
+# SUPER for everything
 #
-# C = close window
-# V = foloat window
-# J = toggle split
-# P = pseudo??
-# arrows = change focus
-# M = sign out
+# App launch
+# Q             -terminal
+# E             -fileManager
+# R             -internet
+# T             -discord
+# Y             -bluetooth
+# Super+shift+S -screenshot
+# alt+space     -app launcher
 #
-# 1-9 = change desktop
-# shift + 1-9 = change focused window to desktop 1-9
+# Interaction
+# arrows  -move
+# HJKL    -move
+# C       -close window
+# V       -float window
+# G       -toggle split (J by default)
+# P       -make window 1/4 of screen
+# N       -lock (should be L but vim 😃)
+# M       -sign out
+# 1-9     -select window
 
 # vim
+# [2-9] -repeat action *x
+#
+# hjkl  -move 1
+# w     -mode to beginning of next word
+# e     -move to end of word
+# 0     -move to start of line
+#
+# i a   -enter insert mode
+# r     -replace single key
+# o     -start new line no mater where you are in line
+# ce    -change till end of word (removes the word and enter insert mode)
+# c$    -change till end of line
+#
+# x       -delete character
+# D       -delete after point
+# dw      -delete till start of next word
+# de      -delete till end of word
+# dd      -delete line
+#
+# yy      -copy line
+#
+# p       -past
+#
+# u       -undo
+# ctrl+r  -redo
+# U       -undo line
+#
+# /       -search
+#
+# :       -command
+# :w      -write
+# :q      -quit
+# :a      -all
+# :qa!    -force quit all
+
+
+
+sensense sensense sensense
 
 
 
 # --- To Do List ----
-- pacman update list
-- dnd spells not need so many concentration
 - vertual mechines
-
 - ls (learn everything)
-- terminal file exploror
 - ProtonVPN --https://wiki.archlinux.org/title/ProtonVPN
+- wireshark
+
 
 
 
@@ -645,6 +696,10 @@ yay -S odysseus-ai-git
 # errors not installed
 
 # this can be done properly if using the method on windows "docker-setup-windows.txt"
+
+
+# tried the catppuccin kde plasma theme
+# looks ugly and I didn't like it
 
 
 # --- Fun Thing I Learned ---

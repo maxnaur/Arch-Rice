@@ -7,8 +7,11 @@
 # auto
 alias ls='ls --color=auto'
 alias grep='grep --color=auto'
-#alias rofi='rofi -show run;'
+alias discord='vesktop'
 alias cl='clear'
+
+# spelling
+alias rn='rm'
 
 # directory
 alias ..='cd ..; echo "cd .."'
@@ -27,6 +30,7 @@ alias spotify='spotify_player;'
 alias spotify-player='spotify_player'
 alias sense='arch-sense;'
 alias vim='nvim'
+alias vin='vim'
 
 # run terminal app
 export PATH="$HOME/.local/bin:$PATH"
@@ -54,9 +58,6 @@ icatfolder() {
     return 1
   fi
 
-  # sort
-  files[@] = sort files[@]
-
   # display
   echo "Press space for next (q to quit):"
   local f k
@@ -69,4 +70,36 @@ icatfolder() {
   done
 }
 
+# update everything
+update() {
+  yay
+  flatpak update
+  cd ~/AUR/Linuwu-Sense/ || return
+  make install
+  cd - >/dev/null
+}
+
+# Sync Arch-Rice to github
+rice() {
+  cd ~/Documents/Arch-Rice/ || return
+  git add .
+  git commit -m "$1"
+  git push origin main
+  cd -
+}
+
+# Rice update config files
+rice-update() {
+  rm ~/Documents/Arch-Rice/config/bashrc
+  cp ~/.bashrc ~/Documents/Arch-Rice/config/bashrc
+  folders=("BraveSoftware" "discord" "fastfetch" "hypr" "kitty" "net.imput.helium" "vesktop" "waybar" "zen")
+  for folder in "${folders[@]}"; do
+    rm -rf ~/Documents/Arch-Rice/config/"$folder"
+    cp -r ~/.config/"$folder" ~/Documents/Arch-Rice/config/"$folder"
+  done
+}
+
 PS1='[\u@\h \W]\$ '
+
+# opencode
+export PATH=/home/max/.opencode/bin:$PATH

@@ -33,3 +33,5 @@ hl.monitor({
 	position = "auto",
 	scale = "auto",
 })
+
+-- Lid Shut

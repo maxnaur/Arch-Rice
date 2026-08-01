@@ -82,10 +82,11 @@ update() {
 # Sync Arch-Rice to github
 rice() {
   cd ~/Documents/Arch-Rice/ || return
+  git rm -r --cached .gitignore
   git add .
   git commit -m "$1"
   git push origin main
-  cd -
+  cd
 }
 
 # Rice update config files

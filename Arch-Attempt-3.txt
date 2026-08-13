@@ -100,7 +100,7 @@ aur-scan system
 sudo pacman -S plasma kde-appkications
 
 # all apps
-sudo pacman -S spotify-player libreoffice-fresh zip unzip flatseal wireshark-qt qbittorrent gwenview pmv flatpak
+sudo pacman -S spotify-player libreoffice-fresh zip unzip flatseal wireshark-qt qbittorrent gwenview pmv flatpak ncdu
 yay -S visual-studio-code-bin zen-browser-bin brave-bin helium-browser-bin vesktop-bin fastfetch localsend-bin nsis-untgz-bin
 flatpak install com.protonvpn.www org.vinegarhq.Sober
 
@@ -328,14 +328,6 @@ hyrlock
 sudo pacman -S ranger
 
 
-
-
-# --- Cyber Security ----
-# wireshark
-
-
-
-
 # ---- Display Manager (system login) ----
 # login screen, terminal based ly
 ly
@@ -497,6 +489,40 @@ git rm -r --cached .gitignore
 # repository can't be more than 2 gigs... I had to many walpapers (over 2 gigs now like 600 megs)
 
 
+# ---- step 1 set up the virtual machine ----
+# chosen KVM/QEMU with virt-manager
+# following this guide
+#https://computingforgeeks.com/install-kvm-arch-linux/
+
+# install packets
+sudo pacman -S qemu-full virt-manager virt-viewer libvirt dnsmasq edk2-ovmf swtpm iptables-nft
+
+# what they are
+qemu          the vm
+virt-manage   GUI of easy use
+virt-viewer   VM display (SPICE/VNC)
+libvirt       glue the KVM and QEMU together
+dnsmasq       NAT-based VM networking
+edk2-ovmf     UEFI firmware for virtual machines – required for UEFI-boot VMs and Secure Boot
+swtpm         Software TPM 2.0 emulator – needed for Windows 11 VMs and TPM-dependent operating systems (I won't need it but useful to have if needed in the future)
+iptables-nft  Firewall back end for NAT networking rules
+
+# run the thing
+sudo systemctl enable --now libvirtd
+# verify
+sudo systemctl status libvirtd
+
+# set up the user group
+sudo usermod -aG libvirt $(whoami)
+relog
+
+# set up bashrc to start vm so it does not run in the background the hole time
+vm() {
+  sudo systemctl start libvirtd
+  sudo virsh net-start default
+  virt-manager
+}
+
 
 # --- Useful bits ----
 # How to uninstall packets with pacman
@@ -515,6 +541,7 @@ lsblk -f
 sudo mkdir -p /mnt/sda1
 # mount
 sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1
+# added alias to do this
 
 # file size of directory
 tree -L 1 -s
@@ -566,6 +593,35 @@ ps aux | grep spotify
 # ui view space taken by files
 sudo ncdu /
 
+# change mac address for headphones (bluetooth not works when switching from windows to linux since 1 device can't have multiple codes)
+[max@sorry ~]$ ip link
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN mode DEFAULT group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+2: enp68s0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc fq_codel state DOWN mode DEFAULT group default qlen 1000
+    link/ether 40:c2:ba:fb:b4:bb brd ff:ff:ff:ff:ff:ff
+    altname enx40c2bafbb4bb
+3: wlan0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP mode DORMANT group default qlen 1000
+    link/ether e4:c7:67:66:60:2f brd ff:ff:ff:ff:ff:ff
+[max@sorry ~]$ sudo ip link set dev wlan0 down
+[sudo] password for max: 
+[max@sorry ~]$ sudo ip link set dev wlan0 address 12:c7:67:66:60:2f
+[max@sorry ~]$ sudo ip link set dev wlan0 up
+
+# clear space from system pass
+# remove old package versions
+sudo pacman -Sc
+sudo rm -f /var/cache/pacman/pkg/*
+# logs
+journalctl --disk-usage
+# limit logs to 500 Mb
+sudo journalctl --vacuum-size=500M
+# clear flatpak cashe
+flatpak uninstall --unused
+
+# where the cashe is from the rest of the system
+~/.cache
+# clear cash
+rm -rf ~/.cache/*
 
 
 # --- Key binds notes ----

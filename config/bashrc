@@ -32,6 +32,9 @@ alias sense='arch-sense;'
 alias vim='nvim'
 alias vin='vim'
 
+# mount
+alias mountbig='sudo mkdir -p /mnt/sda1; sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1;'
+
 # run terminal app
 export PATH="$HOME/.local/bin:$PATH"
 
@@ -72,32 +75,102 @@ icatfolder() {
 
 # update everything
 update() {
+  cashe
   yay
   flatpak update
-  cd ~/AUR/Linuwu-Sense/ || return
+  Linuwu-Sense
+}
+
+Linuwu-Sense() {
+  # fix nvidia drivers
+  sudo pacman -Sy linux-headers
+
+  cd ~/AUR/ || return
+
+  if [ -d "Linuwu-Sense" ]; then
+    cd Linuwu-Sense
+    git fetch
+    # Compare local HEAD with the remote tracking branch
+    LOCAL=$(git rev-parse @)
+    REMOTE=$(git rev-parse @{u})
+
+    if [ "$LOCAL" != "$REMOTE" ]; then
+      git pull
+    fi
+    cd ..
+  else
+    git clone https://github.com/0x7375646F/Linuwu-Sense.git
+  fi
+
+  cd Linuwu-Sense
   make install
-  cd - >/dev/null
+  cd || return
+}
+
+cashe() {
+  # This looks at the available space on the root partition
+  local before=$(df / --output=avail | tail -n 1)
+
+  echo "Cleaning system cache..."
+  yes | sudo pacman -Sc              # pacman package versions
+  sudo rm -f /var/cache/pacman/pkg/* # remove anything that couldn't be removed
+  flatpak uninstall --unused         # flatpak cash
+  sudo journalctl --vacuum-size=500M # log files
+  rm -rf ~/.cache/*                  # the cache
+
+  # Capture disk usage after cleanup
+  local after=$(df / --output=avail | tail -n 1)
+  local saved=$((after - before))  # Calculate the difference
+  local saved_mb=$((saved / 1024)) # Convert Kilobytes to Megabytes for readability
+
+  echo "Space recovered: ${saved_mb} MB"
 }
 
 # Sync Arch-Rice to github
 rice() {
+  rice-update
   cd ~/Documents/Arch-Rice/ || return
   git rm -r --cached .gitignore
   git add .
   git commit -m "$1"
   git push origin main
-  cd
+  cd || return
 }
 
 # Rice update config files
 rice-update() {
-  rm ~/Documents/Arch-Rice/config/bashrc
+  # Update bashrc
   cp ~/.bashrc ~/Documents/Arch-Rice/config/bashrc
+
+  # update config folders
   folders=("BraveSoftware" "discord" "fastfetch" "hypr" "kitty" "net.imput.helium" "vesktop" "waybar" "zen")
+
   for folder in "${folders[@]}"; do
-    rm -rf ~/Documents/Arch-Rice/config/"$folder"
-    cp -r ~/.config/"$folder" ~/Documents/Arch-Rice/config/"$folder"
+    local src="~/.config/$folder"
+    local dest="~/Documents/Arch-Rice/config/$folder"
+
+    # Expand tildes for the find and sha256sum commands
+    local src_expanded=$(eval echo "$src")
+    local dest_expanded=$(eval echo "$dest")
+
+    # Calculate hash of current config and backup config
+    # We find all files, sort them by name to ensure consistency, and hash their contents
+    local src_hash=$(find "$src_expanded" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
+    local dest_hash=$(find "$dest_expanded" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
+
+    if [ "$src_hash" != "$dest_hash" ]; then
+      echo $folder
+      rm -rf "$dest_expanded"
+      cp -r "$src_expanded" "$dest_expanded"
+    fi
   done
+}
+
+# run vertual mechine
+vm() {
+  sudo systemctl start libvirtd
+  sudo virsh net-start default
+  virt-manager
 }
 
 PS1='[\u@\h \W]\$ '

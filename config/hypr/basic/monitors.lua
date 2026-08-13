@@ -3,6 +3,7 @@
 ------------------
 
 -- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- hyprctl monitors all
 
 -- laptop screen
 hl.monitor({
@@ -11,10 +12,10 @@ hl.monitor({
 	position = "0x0",
 	scale = "2",
 })
-hl.workspace_rule({ workspace = "1", monitor = "eDP-1", default = true })
-hl.workspace_rule({ workspace = "2", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "3", monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "4", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "1", default_name = "🐵", monitor = "eDP-1", default = true })
+hl.workspace_rule({ workspace = "2", default_name = "🦊", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "3", default_name = "🐻", monitor = "eDP-1" })
+hl.workspace_rule({ workspace = "4", default_name = "🐼", monitor = "eDP-1" })
 
 -- acer monitor screen
 hl.monitor({
@@ -23,8 +24,9 @@ hl.monitor({
 	position = "auto",
 	scale = "1",
 })
-hl.workspace_rule({ workspace = "5", monitor = "HDMI-A-1", default = true })
-hl.workspace_rule({ workspace = "6", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "5", default_name = "🎥", monitor = "HDMI-A-1", default = true })
+hl.workspace_rule({ workspace = "6", default_name = "💬", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "7", default_name = "🎵", monitor = "HDMI-A-1" })
 
 -- second screen will be on the right side
 hl.monitor({

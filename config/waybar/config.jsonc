@@ -28,23 +28,25 @@
     //"wireplumber",
   "hyprland/workspaces": {
     "format": "{name}",
-    "on-click": "activate",
+    //"on-click": "activate",
     "show-special": true,
     "sort-by-number": true
   },
   "clock": {
     "timezone": "Europe/London",
     "format": "{:%I:%M}",
-    "format-alt": "{:%d-%m}",
+    "format-alt": "{:%d-%m-%y}",
     "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
   },
   "backlight": {
     // "device": "acpi_video1",
     "device": "intel_backlight",
-    "format": "{percent}% {icon}",
+    "format": "{icon}",
+    "format-alt": "{percent}% {icon}",
+    "tooltip-format": "{percent}% {icon}",
     "format-icons": ["", "", "", "", "", "", "", "", ""],
     "on-scroll-up": "brightnessctl -qd intel_backlight set +4%",
-    "on-scroll-down": "brightnessctl -qd intel_backlight set 4%- --min 0",
+    "on-scroll-down": "brightnessctl -qd intel_backlight set 4%-",
   },
   "cpu": {
     "format": "{usage}% ",
@@ -56,17 +58,16 @@
   "temperature": {
     // "thermal-zone": 2,
     // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-    "critical-threshold": 90,
-    "format": "{temperatureC}°C {icon}",
-    "format-alt": "{icon}",
+    "critical-threshold": 80,
+    "format": "{icon}",
+    "format-alt": "{temperatureC}°C {icon}",
     "format-icons": ["", "", "", "", ""]
   },
   "battery": {
     "bat": "BAT1",
-    "interval": 60,
     "format": "{capacity}% {icon}",
     "format-alt": "{time} {icon}",
-    "format-full": "",
+    "format-plugged": "",
     "format-icons": {
         "default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
@@ -77,6 +78,7 @@
     "format-ethernet": "󰈀",
     "tooltip-format": "{ifname} via {gwaddr}/{cidr}  ",
     "format-disconnected": "Disconnected ⚠",
+    // "format-alt": "{icon}", // save space
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
     // interface
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
@@ -84,12 +86,12 @@
   },
   "bluetooth": {
     "format": "",
+    "format-alt": "",
     "format-disabled": "󰂲",
     "format-connected": "{num_connections} ",
     "tooltip-format": "{controller_alias}\t{controller_address}",
     "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
     "tooltip-format-enumerate-connected": "{device_alias}",
-    "on-click": "blueberry",
     "on-click-right": "blueberry",
   },
   "pulseaudio#input": {

@@ -1,21 +1,21 @@
 # ~/.bashrc
-# reset . ~/.bashrc
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
 # auto
 alias ls='ls --color=auto'
+alias l='ls'
+alias ll='ls -A --color=auto'
+alias lll='ls -lha --color=auto'
 alias grep='grep --color=auto'
 alias discord='vesktop'
 alias cl='clear'
-
-# spelling
-alias rn='rm'
+alias size='ncdu'
 
 # directory
-alias ..='cd ..; echo "cd .."'
-alias ...='cd ..; cd .. ; echo "cd ..; cd .."'
+alias ..='cd ..; ls'
+alias ...='cd ..; cd .. ; ls'
 alias hypr='cd ~/.config/hypr/;'
 alias arch='cd ~/Documents/Arch-Rice/;'
 
@@ -31,6 +31,8 @@ alias spotify-player='spotify_player'
 alias sense='arch-sense;'
 alias vim='nvim'
 alias vin='vim'
+alias nano='nvim'
+alias pacman='sudo pacman -Syu'
 
 # mount
 alias mountbig='sudo mkdir -p /mnt/sda1; sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1;'
@@ -75,13 +77,20 @@ icatfolder() {
 
 # update everything
 update() {
-  cashe
   yay
   flatpak update
-  Linuwu-Sense
 }
 
-Linuwu-Sense() {
+# update and clear cashe
+updateclear() {
+  yes | cashe
+  yes | yay
+  yes | flatpak update
+  yes | fixfans
+}
+
+#Linuwu-Sense() {
+fixfans() {
   # fix nvidia drivers
   sudo pacman -Sy linux-headers
 
@@ -103,6 +112,8 @@ Linuwu-Sense() {
   fi
 
   cd Linuwu-Sense
+  sudo mkdir /lib/modules/7.1.9-arch1-2/build
+  sudo mkdir /usr/lib/modules/7.1.9-arch1-2/build
   make install
   cd || return
 }
@@ -128,7 +139,7 @@ cashe() {
 
 # Sync Arch-Rice to github
 rice() {
-  rice-update
+  rice-sync
   cd ~/Documents/Arch-Rice/ || return
   git rm -r --cached .gitignore
   git add .
@@ -137,33 +148,63 @@ rice() {
   cd || return
 }
 
-# Rice update config files
-rice-update() {
-  # Update bashrc
-  cp ~/.bashrc ~/Documents/Arch-Rice/config/bashrc
+# rice update config files
+rice-sync() {
+  # MATCH THE EXACT CASING: Documents/Arch-Rice
+  local backup_root="$HOME/Documents/Arch-Rice/config-files"
+  local bashrc_dest="$HOME/Documents/Arch-Rice/config-files/bashrc"
+  mkdir -p $backup_root/config
+  mkdir -p $backup_root/etc
 
   # update config folders
-  folders=("BraveSoftware" "discord" "fastfetch" "hypr" "kitty" "net.imput.helium" "vesktop" "waybar" "zen")
+  local folders=("BraveSoftware" "btop" "discord" "dunst" "Code" "fastfetch" "flameshot" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
 
   for folder in "${folders[@]}"; do
-    local src="~/.config/$folder"
-    local dest="~/Documents/Arch-Rice/config/$folder"
-
-    # Expand tildes for the find and sha256sum commands
-    local src_expanded=$(eval echo "$src")
-    local dest_expanded=$(eval echo "$dest")
-
-    # Calculate hash of current config and backup config
-    # We find all files, sort them by name to ensure consistency, and hash their contents
-    local src_hash=$(find "$src_expanded" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
-    local dest_hash=$(find "$dest_expanded" -type f -print0 | sort -z | xargs -0 sha256sum | sha256sum | awk '{print $1}')
-
-    if [ "$src_hash" != "$dest_hash" ]; then
-      echo $folder
-      rm -rf "$dest_expanded"
-      cp -r "$src_expanded" "$dest_expanded"
-    fi
+    local src="$HOME/.config/$folder"
+    local dest="$backup_root/config/$folder"
+    sync_if_changed "$src" "$dest" "folder"
   done
+
+  # kde config for hyprland with kde apps
+  sync_if_changed "$HOME/.config/kdeglobals" "$backup_root/config/kdeglobals" "file"
+
+  # update bashrc
+  sync_if_changed "$HOME/.bashrc" "$bashrc_dest" "file"
+
+  # update etc config files
+  local etc_folders=("default/grub" "pacman.conf")
+
+  for folder in "${etc_folders[@]}"; do
+    local src="/etc/$folder"
+    local dest="$backup_root/etc/$folder"
+    sync_if_changed "$src" "$dest" "file"
+  done
+}
+
+sync_if_changed() {
+  local src="$1"
+  local dest="$2"
+  local type="$3"
+
+  # If source doesn't exist, skip
+  [[ -e "$src" ]] || return 1
+
+  # Generate hash of CONTENT only, ignoring file paths
+  # We find all files, and for each file, we feed the content into sha256sum
+  # 'cat' ensures we are hashing the bytes of the file, not the filename string
+  local src_hash=$(LC_ALL=C find "$src" -type f -print0 | sort -z | xargs -0 cat | sha256sum | awk '{print $1}')
+  local dest_hash=$(LC_ALL=C find "$dest" -type f -print0 | sort -z | xargs -0 cat | sha256sum | awk '{print $1}')
+
+  if [ "$src_hash" != "$dest_hash" ]; then
+    echo "Updating: $src"
+    mkdir -p "$(dirname "$dest")"
+    if [ "$type" == "folder" ]; then
+      rm -rf "$dest"
+      cp -r "$src" "$dest"
+    else
+      cp "$src" "$dest"
+    fi
+  fi
 }
 
 # run vertual mechine
@@ -173,7 +214,9 @@ vm() {
   virt-manager
 }
 
-PS1='[\u@\h \W]\$ '
+# the username on the left side
+# default PS1='[\u@\h \W]\$ '
+PS1=' \W > '
 
 # opencode
 export PATH=/home/max/.opencode/bin:$PATH

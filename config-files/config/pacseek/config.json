@@ -6,7 +6,7 @@
 	"AurInstallCommand": "",
 	"AurUpgradeCommand": "",
 	"DisableAur": false,
-	"MaxResults": 500,
+	"MaxResults": 800,
 	"PacmanDbPath": "/var/lib/pacman/",
 	"PacmanConfigPath": "/etc/pacman.conf",
 	"InstallCommand": "yay -S",

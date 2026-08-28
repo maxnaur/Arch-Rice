@@ -50,10 +50,14 @@
   },
   "cpu": {
     "format": "{usage}% ",
+    "interval": 30,
     "tooltip": false,
   },
   "memory": {
     "format": "{}% ",
+    "format-alt": "{used:0.1f}GiB",
+    "interval": 30,
+    "tooltip": false,
   },
   "temperature": {
     // "thermal-zone": 2,
@@ -67,7 +71,7 @@
     "bat": "BAT1",
     "format": "{capacity}% {icon}",
     "format-alt": "{time} {icon}",
-    "format-plugged": "",
+    "format-full": "",
     "format-icons": {
         "default": ["󰂎", "󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
         "charging": ["󰢟", "󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"]
@@ -78,7 +82,7 @@
     "format-ethernet": "󰈀",
     "tooltip-format": "{ifname} via {gwaddr}/{cidr}  ",
     "format-disconnected": "Disconnected ⚠",
-    // "format-alt": "{icon}", // save space
+    "format-disabled": "OFF ⚠",
     "format-alt": "{ifname}: {ipaddr}/{cidr}",
     // interface
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],

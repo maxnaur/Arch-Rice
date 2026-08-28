@@ -45,6 +45,8 @@ cd ~/AUR/
 git clone https://github.com/0x7375646F/Linuwu-Sense.git
 cd Linuwu-Sense
 make install
+# keep in mind that some updates break this installation
+# I made it install after each update, then I got annoyed at it so I just added a script in bashrc under "fixfans"
 
 yay -S arch-sense
 # remove need for admin
@@ -62,8 +64,13 @@ sudo systemctl enable --now arch-sense.service
 
 ---- Boot Loader ----
 # Edit GRUB configuration
-nvim /etc/default/grub
+sudo nvim /etc/default/grub
 # nothing is worth changing but updated the style it is written in to make it easier to read
+
+
+--- Packman ---
+sudo vim /etc/pacman.conf
+just add 'color' and 'ILoveCandy' to the file as lines
 
 
 ---- Install Basic Packets ----
@@ -84,7 +91,6 @@ yay
 # a - asumme packets are from aur
 # other thing that can be updated
 flatpak update
-npm install update
 
 
 # fonts and aur
@@ -592,6 +598,9 @@ ps aux | grep spotify
 
 # ui view space taken by files
 sudo ncdu /
+
+# list size
+du -h --max-depth=1 | sort -h
 
 # change mac address for headphones (bluetooth not works when switching from windows to linux since 1 device can't have multiple codes)
 [max@sorry ~]$ ip link

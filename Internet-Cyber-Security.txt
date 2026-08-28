@@ -1,0 +1,18 @@
+# --- Cyber Security ----
+
+# --- cisco packet tracer ---
+packettracer cant be installed with yay and must be installed
+need to install CiscoPacketTracer_901_Ubuntu_64bit.deb
+cd ~/AUR
+git clone https://aur.archlinux.org/packettracer.git
+cd packettracer
+cp ~/Downloads/CiscoPacketTracer_901_Ubuntu_64bit.deb ./CiscoPacketTracer_901_Ubuntu_64bit.deb
+makepkg -si
+run /usr/lib/packettracer/packettracer.AppImage
+
+
+
+
+
+# --- Wireshark ---
+

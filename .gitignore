@@ -1,0 +1,30 @@
+# items not being tracked
+
+# set up for cisco packet tracer
+# reason for removel size > 100mb
+CiscoPacketTracer_901_Ubuntu_64bit.deb
+
+# my web browsers
+# you ain't geting my history and apps
+config-files/config/BraveSoftware/
+config-files/config/net.imput.helium/
+config-files/config/zen/
+
+# not logging into my discord
+config-files/config/discord/
+config-files/config/vesktop/
+
+# not getting my spoify account (i know theres 2fa but still)
+config-files/config/spotify-player/
+!config-files/config/spotify-player/spotify-player.tera
+!config-files/config/spotify-player/theme.toml
+!config-files/config/spotify-player/justfile
+
+# again loggin but showing config would be cool... could figure out a way round it at some point
+config-files/config/Code/
+# using lazy vim
+config-files/config/nvim/
+
+# qBittorent sensitive
+config-files/config/qBittorent/ipc-socket
+

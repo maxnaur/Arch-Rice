@@ -14,8 +14,8 @@ alias cl='clear'
 alias size='ncdu'
 
 # directory
-alias ..='cd ..; ls'
-alias ...='cd ..; cd .. ; ls'
+alias ..='cd ..;'
+alias ...='cd ..; cd .. ;'
 alias hypr='cd ~/.config/hypr/;'
 alias arch='cd ~/Documents/Arch-Rice/;'
 
@@ -145,12 +145,10 @@ rice() {
   git add .
   git commit -m "$1"
   git push origin main
-  cd || return
 }
 
 # rice update config files
 rice-sync() {
-  # MATCH THE EXACT CASING: Documents/Arch-Rice
   local backup_root="$HOME/Documents/Arch-Rice/config-files"
   local bashrc_dest="$HOME/Documents/Arch-Rice/config-files/bashrc"
   mkdir -p $backup_root/config
@@ -179,6 +177,10 @@ rice-sync() {
     local dest="$backup_root/etc/$folder"
     sync_if_changed "$src" "$dest" "file"
   done
+
+  # clear the cash inside the folders
+  local remove_folder=("/config/discord/Cache" "/config/vesktop/Code Cache" "/config/vesktop/Crashpad" "")
+  local remove_file=("/config/vesktop/SingletonCookie" "/config/vesktop/SingletonLock" "/config/vesktop/SingletonSocket" "")
 }
 
 sync_if_changed() {

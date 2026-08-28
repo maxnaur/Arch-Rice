@@ -12,13 +12,12 @@ config-files/config/zen/
 
 # not logging into my discord
 config-files/config/discord/
-config-files/config/vesktop/
+config-files/config/vesktop/*
+!config-files/config/vesktop/state.json
+!config-files/config/vesktop/settings/*
 
-# not getting my spoify account (i know theres 2fa but still)
-config-files/config/spotify-player/
-!config-files/config/spotify-player/spotify-player.tera
-!config-files/config/spotify-player/theme.toml
-!config-files/config/spotify-player/justfile
+# not getting my spoify account ID
+config-files/config/spotify-player/app.toml
 
 # again loggin but showing config would be cool... could figure out a way round it at some point
 config-files/config/Code/
@@ -26,5 +25,7 @@ config-files/config/Code/
 config-files/config/nvim/
 
 # qBittorent sensitive
-config-files/config/qBittorent/ipc-socket
+config-files/config/qBittorent/*
+!config-files/config/qBittorent/assets/
+!config-files/config/qBittorent/src/
 

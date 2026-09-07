@@ -530,6 +530,40 @@ vm() {
 }
 
 
+# --- Python ---
+# make a vertual enviroment
+python -m venv ~/.venvs/autoclicker
+source ~/.venvs/autoclicker/bin/activate
+
+# install what you need
+python -m pip install pyautogui
+
+#run the code
+python autoclicker.py
+
+# end session
+deactivate
+
+# reconect
+source ~/.venvs/autoclicker/bin/activate
+
+
+# -- running llm locally best attempt (still didn't work) --
+#install ollama
+#install gemma4:31b
+
+pip install pyenv python312 # had a whole thing for 30 mins just to find out this was the best way
+
+#run this in a vertual python enviroment
+python3.12 -m venv ~/.venvs/gemini
+source ~/.venvs/gemini/bin/activate
+pip install setuptools
+export PYO3_USE_ABI3_FORWARD_COMPATIBILITY=1 && pip install open-interpreter
+
+interpreter --model ollama/gemma4:31b
+# just didn't work for seemingly no reason
+
+
 # --- Useful bits ----
 # How to uninstall packets with pacman
 pacman -Rsn 'pkg'

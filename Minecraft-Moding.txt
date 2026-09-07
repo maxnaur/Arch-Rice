@@ -1,0 +1,213 @@
+I guess I'm making a Minecraft mod.
+I have lots of ideas that I have been making in the background for years and features from other mods I want moved into 1 mod
+
+I plan to use Fabric
+
+text editor: intellij-idea-community-edition-4
+using this for the template: https://fabricmc.net/develop/template/
+
+
+
+
+Quality of life
+- right click harvest 
+- hoe give 3 by 3 harvest 
+- feather fall doesn't trample crops
+- remove fog or change 
+- comparable with sodium
+- shift right click armour stand to add arms and item holder
+- toggle see where mobs spawn
+- connected glass with back of the glass
+- wall climb and other new mobility 
+- swords don't get effected by grass
+
+
+
+Enchantment system 
+
+Minecraft new enchant system 
+Skill tree where every way is good 
+Enchanted books are removed and rare enchants that aren’t on the table are replaced by tomes that can be put in chiselled bookshelves around an enchanting table to add enchants to the skill tree
+Anvil cannot combine items to make better enchants and cost doesn’t increase so less need of mending 
+Grind stones can remove individual enchants
+Holy block that adds and removes curses using cleric villagers selling holy water and illigers drop items that can cures items.
+
+All
+default; 
+Unbracing - level * 10 iron
+Treasure;
+Soul bound - 10 shuker shells - dragon egg - keep item on respawn (end up on but bar so no curse of binding pumpkin)
+Split
+Mending - unlock with villagers - 32 enchantment bottle
+Repair - unlocked with fishing - 48 copper or 20 ink sacks - will repair 1 durability every 10-60 secs 
+
+Armor;
+default;
+Protection - level * 10 bones - with all peace’s maxed granting 2.5 * level to 40% defence from all damage (normal 64% (4% per level))
+Thorns - level * 20 cactus
+
+Helmet;
+default;
+Projectile protection - level * 10 arrows - 5 levels with the protection increase by 10 * level to 50% with prot
+Treasure;
+Aqua infinity - level * 10 puffer fish - heart of the sea
+Respiration - level * 10 scute - turtle helmet
+New;
+Bounce - refuse damage from elytra hitting wall - 1 - 5 - level * 10 slime - use elytra to unlock 
+
+Chest;
+default;
+Blast protection - level * 10 gunpowder - 5 levels with the protection increase by 10 * level to 50% with prot 
+
+Legs;
+default;
+Fire resistance - level * 10 magma cream - 5 levels with the protection increase by 7 * level to 70% with prot and boots
+Treasure;
+Swift sneak - level * 1 shards warden - replace book found with a tomes
+Pockets - level * 1 shucker box - 3 levels adds a row of inventory - dragon head or like sulker shells
+
+Boots;
+default;
+Fire resistance - level * 10 magma cream - 5 levels with the protection increase by 4 * level to 70% with prot and legs
+Treasure;
+Split
+Depth strider - level * 10 cod - heart of the sea
+Frost walker - 10 packed ice then 10 blue ice - ice biome update item 
+Soul speed - level * 10 soul speed - given by barbering with pigeons (or tome instead of book)
+
+Sword 
+default;
+Sharpness - level * 10 iron max - max +3 dam (0.5 * level + 0.5)
+Smite - level * 10 rotten flesh - max +12.5 dam (2.5 * level)
+Fire aspect - level * 10 - blaze powder
+Sweating edge - iron sword
+Looting - level * 10 gold
+Knock back - level * piston
+Remove;
+Bane of Arthropods - level * 10 spiders eye - (2.5 * level) - useless
+
+Trident; - should be craftable with a drop from the elder guardian
+default;
+Impailing - level * 5 prismarine shards - to any wet creature 21 dam maxed (2.5 * level) 
+Split
+Loyalty - level * 5 leads - works in void
+Riptide - level * 3 brease balls
+Channelling - 5 copper lighting poles
+
+Tool;
+Efficiency - level * 10 iron
+Split
+Fortune - level * 20 gold
+Silk touch - honey block
+
+Axe; 
+default;
+Sharpness
+New;
+Smite
+Beheading - wither skeleton head - 1 - 3% to get head on kill
+
+Pickaxe;
+
+Shovel;
+
+Fishing rod;
+All enchants slowly gets added as utility is used looting and luck of the sea
+
+Shears;
+
+Flint and steel;
+
+Ranged;
+
+Bow;
+default;
+Power - level * 10 string 
+Punch - level * 2 piston
+Flame - 10 blaze powder 
+Split;
+Infinity - 64 arrows 
+Mending 
+Repair
+
+Crossbow; 
+default;
+Quick charge - level * 5 trip wire hooks
+Split
+Piercing - 
+Multishot -
+Lurched - 10 tnt - loads only fireworks that launch entities that are around the impact
+
+
+Fix Transport 
+1. horse's
+   - can have a second passinger
+   - horse can swim slowly
+   - armour is enchantable 
+   - horse shoes that boost stats 
+   - goat horn works like elden ring
+2. Minecart 
+   - 32 rails for craft not 16
+   - 16 powerd rails not 6
+   - top speed from 8 to 48 which can be reached by holding W (not effect readstone)
+   - copper rail sets speed 0 unpowered and up to 48 powered
+   - funice minecart can get speed upto 64 and allow any fule with indicators of how full
+3. Boats
+   - Good
+
+Ideas
+1. Trims do shit 
+2. Trims on tools and elytera
+3. Fix hoppers by making items check on block update or change block (will cause lag with lots of items so toggle)
+4. Villager become a workforce
+5. Shelf
+6. block placer (dispenser with blocks)
+7. Gold hoper filters items
+8. Chunk loader
+9. Farmable technology advanced creatures (drop iron and readstone)
+10. Later the overworld on the neater but connect them by falling through the void (leaving a gap for farms and slow red transition)
+11. Break bedrock
+12. Scoober kit for water and lava
+13. Neather lava sea update (used to be an ocean style)
+14. Clump xp
+15. Xp not go through portal after kill dragon 
+16. Grave that rots like ark
+17. Use shuker like bundles 
+18. Make a need for good armour 
+19. 
+
+
+100% farmable 
+- bamboo
+- moss trees
+- wood
+- gold (piglans)
+- coad (with skeletons)
+- 
+
+Villagers
+- iron
+- quartz
+- emerald 
+- readstone
+- 
+
+Not farmable 
+- lapis 
+- diamond 
+- copper
+- beep slate 
+- 
+
+
+Farms I make rn
+1. Villagers
+2. Iron farm
+3. Bamboo farm
+4. Slime farm with snow golem
+5. Piglans gold
+6. 
+
+Inventory pets
+
+

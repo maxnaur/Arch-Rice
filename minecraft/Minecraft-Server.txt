@@ -1,0 +1,68 @@
+what we need:
+sudo pacman -S jdk-openjdk jdk25-openjdk ufw expect
+#verify:
+java -version
+
+# find the java versions owned
+archlinux-java status
+# set version
+sudo archlinux-java set java-26-openjdk
+
+
+# make a new user for the server
+yes minecraft | sudo usermod -aG wheel username
+# change the password of the user
+#sudo passwd minecraft
+
+# give the wheel group sudo rights
+sudo EDITOR=vim visudo
+# uncomment
+#%wheel ALL=(ALL:ALL) ALL
+
+# become the user
+su - minecraft
+
+mkdir minecraft_server
+cd minecraft_server
+
+# install server.jar from the offical minecraft server
+wget https://launcher.mojang.com/v1/objects/fe123682e9cb30031eae351764f653500b7396c9/server.jar
+# or get the paper file
+paper-26.2-121.jar
+
+# set ram usage (defaul seams very small)
+java -Xmx1024M -Xms1024M -jar server.jar nogui
+
+vim eula.txt
+# set "eula=true"
+
+
+java -Xmx8048M -Xms8048M -jar server.jar nogui
+java -Xmx8048M -Xms8048M -jar paper-26.2-121.jar nogui
+# To stop the server gracefully, type stop in the server console
+
+# tweak server
+vim server.properties
+
+
+# set up a backup-worlds.sh file
+#!/bin/bash
+BACKUP_DIR="/home/minecraft/backups"
+SERVER_DIR="/home/minecraft/minecraft_server"
+DATE=$(date +%Y%m%d%H%M%S)
+mkdir -p $BACKUP_DIR
+tar -czvf $BACKUP_DIR/backup_$DATE.tar.gz $SERVER_DIR/world $SERVER_DIR/server.properties
+
+chmod +x backup-worlds.sh
+./backup-worlds.sh
+
+
+# Firewall Configuration: Use iptables or ufw to restrict access to the server ports. By default, Minecraft uses port 25565.
+sudo ufw allow 25565/tcp
+
+
+# running it
+su - minecraft
+cd Will-Server
+java -Xmx8048M -Xms8048M -jar paper-26.2-121.jar nogui
+

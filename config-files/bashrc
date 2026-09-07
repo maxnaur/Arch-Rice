@@ -18,12 +18,12 @@ alias ..='cd ..;'
 alias ...='cd ..; cd .. ;'
 alias hypr='cd ~/.config/hypr/;'
 alias arch='cd ~/Documents/Arch-Rice/;'
-
-# .bashrc
-alias bashrc='nvim ~/.bashrc; source ~/.bashrc'
-alias bashcr='bashrc'
 # grub
 alias grub='sudo nvim /etc/default/grub;'
+
+# .bashrc
+alias bashrc='nvim ~/.bashrc; source ~/.bashrc' # worning this does not inpact the whole computer just the tab of kitty you are on sine each tab is it's own bash incident
+alias bashcr='bashrc'
 
 # terminal app
 alias spotify='spotify_player;'
@@ -138,9 +138,7 @@ cashe() {
 }
 
 # Sync Arch-Rice to github
-rice() {
-  rice-sync
-  cd ~/Documents/Arch-Rice/ || return
+git-sink() {
   git rm -r --cached .gitignore
   git add .
   git commit -m "$1"
@@ -170,7 +168,7 @@ rice-sync() {
   sync_if_changed "$HOME/.bashrc" "$bashrc_dest" "file"
 
   # update etc config files
-  local etc_folders=("default/grub" "pacman.conf")
+  local etc_folders=("default/grub" "pacman.conf" "locale.gen")
 
   for folder in "${etc_folders[@]}"; do
     local src="/etc/$folder"
@@ -219,6 +217,3 @@ vm() {
 # the username on the left side
 # default PS1='[\u@\h \W]\$ '
 PS1=' \W > '
-
-# opencode
-export PATH=/home/max/.opencode/bin:$PATH

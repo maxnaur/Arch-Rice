@@ -20,10 +20,25 @@ alias hypr='cd ~/.config/hypr/;'
 alias arch='cd ~/Documents/Arch-Rice/;'
 # grub
 alias grub='sudo nvim /etc/default/grub;'
+# tree
+alias tree1='tree -L 1 -s'
 
 # .bashrc
 alias bashrc='nvim ~/.bashrc; source ~/.bashrc' # worning this does not inpact the whole computer just the tab of kitty you are on sine each tab is it's own bash incident
 alias bashcr='bashrc'
+
+# Sync Arch-Rice to github
+alias ga='git add .'
+gr() { git rm -r --cached ."$1"; }
+gc() { git commit -m "$1"; }
+alias gp='git push origin main'
+# full set
+gs() {
+  git add .
+  git rm -r --cached .gitignore
+  git commit -m "$1"
+  git push origin main
+}
 
 # terminal app
 alias spotify='spotify_player;'
@@ -31,7 +46,7 @@ alias spotify-player='spotify_player'
 alias sense='arch-sense;'
 alias vim='nvim'
 alias vin='vim'
-alias nano='nvim'
+#alias nano='nvim'
 alias pacman='sudo pacman -Syu'
 
 # mount
@@ -39,6 +54,9 @@ alias mountbig='sudo mkdir -p /mnt/sda1; sudo mount -t ntfs-3g /dev/sda1 /mnt/sd
 
 # run terminal app
 export PATH="$HOME/.local/bin:$PATH"
+
+# run minecraft-server
+alias minecraft-server='~/Documents/Arch-Rice/minecraft-server/start-server.sh'
 
 # image display
 icat() {
@@ -86,13 +104,13 @@ updateclear() {
   yes | cashe
   yes | yay
   yes | flatpak update
-  yes | fixfans
+  yes | fanfix
 }
 
 #Linuwu-Sense() {
-fixfans() {
+fanfix() {
   # fix nvidia drivers
-  sudo pacman -Sy linux-headers
+  #sudo pacman -Sy linux-headers
 
   cd ~/AUR/ || return
 
@@ -137,23 +155,16 @@ cashe() {
   echo "Space recovered: ${saved_mb} MB"
 }
 
-# Sync Arch-Rice to github
-git-sink() {
-  git rm -r --cached .gitignore
-  git add .
-  git commit -m "$1"
-  git push origin main
-}
-
 # rice update config files
-rice-sync() {
+rs() {
   local backup_root="$HOME/Documents/Arch-Rice/config-files"
   local bashrc_dest="$HOME/Documents/Arch-Rice/config-files/bashrc"
   mkdir -p $backup_root/config
   mkdir -p $backup_root/etc
+  mkdir -p $backup_root/AUR
 
   # update config folders
-  local folders=("BraveSoftware" "btop" "discord" "dunst" "Code" "fastfetch" "flameshot" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
+  local folders=("BraveSoftware" "btop" "dunst" "Code" "fastfetch" "flameshot" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
 
   for folder in "${folders[@]}"; do
     local src="$HOME/.config/$folder"
@@ -168,7 +179,7 @@ rice-sync() {
   sync_if_changed "$HOME/.bashrc" "$bashrc_dest" "file"
 
   # update etc config files
-  local etc_folders=("default/grub" "pacman.conf" "locale.gen")
+  local etc_folders=("default/grub" "pacman.conf" "locale.gen" "ly/config.ini")
 
   for folder in "${etc_folders[@]}"; do
     local src="/etc/$folder"
@@ -179,6 +190,18 @@ rice-sync() {
   # clear the cash inside the folders
   local remove_folder=("/config/discord/Cache" "/config/vesktop/Code Cache" "/config/vesktop/Crashpad" "")
   local remove_file=("/config/vesktop/SingletonCookie" "/config/vesktop/SingletonLock" "/config/vesktop/SingletonSocket" "")
+
+  # update config folders
+  local folders=("Linuwu-Sense" "packettracer" "yay-bin")
+
+  for folder in "${folders[@]}"; do
+    local src="$HOME/AUR/$folder"
+    local dest="$backup_root/AUR/$folder"
+    sync_if_changed "$src" "$dest" "folder"
+    local git="$backup_root/AUR/$folder/.git"
+    rm -rf $git
+    echo "rm -rf $git"
+  done
 }
 
 sync_if_changed() {
@@ -199,7 +222,7 @@ sync_if_changed() {
     echo "Updating: $src"
     mkdir -p "$(dirname "$dest")"
     if [ "$type" == "folder" ]; then
-      rm -rf "$dest"
+      rm -rf "$dest" 2>/dev/null
       cp -r "$src" "$dest"
     else
       cp "$src" "$dest"

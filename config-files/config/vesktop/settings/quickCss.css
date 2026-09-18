@@ -1,0 +1,4 @@
+# discord css file
+/* macchiato */
+@import url("https://catppuccin.github.io/discord/dist/catppuccin-macchiato.theme.css");
+* { font-family: 'lexend' }

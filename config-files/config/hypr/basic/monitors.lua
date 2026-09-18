@@ -24,9 +24,9 @@ hl.monitor({
 	position = "auto",
 	scale = "1",
 })
-hl.workspace_rule({ workspace = "5", default_name = "🎥", monitor = "HDMI-A-1", default = true })
+hl.workspace_rule({ workspace = "5", default_name = "🍿", monitor = "HDMI-A-1", default = true })
 hl.workspace_rule({ workspace = "6", default_name = "💬", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "7", default_name = "🎵", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "7", default_name = "🎷", monitor = "HDMI-A-1" })
 
 -- second screen will be on the right side
 hl.monitor({

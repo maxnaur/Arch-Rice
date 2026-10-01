@@ -11,8 +11,10 @@ makepkg -si
 run /usr/lib/packettracer/packettracer.AppImage
 
 
-
+# list of aliases as discovered
 
 
 # --- Wireshark ---
+
+# installs easy will wright notes as I need them
 

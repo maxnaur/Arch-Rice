@@ -76,7 +76,7 @@ just add 'color' and 'ILoveCandy' to the file as lines
 ---- Install Basic Packets ----
 # past all this
 sudo loadkeys uk
-pacman -S neovim firefox btop git man tldr btop unzip otf-font-awesome`` openssh
+pacman -S neovim firefox btop git man tldr btop unzip otf-font-awesome openssh
 mkdir AUR
 cd AUR
 git 'https://aur.archlinux.org/yay-bin.git'
@@ -331,7 +331,10 @@ hyrlock
 # file manager TUI
 # ranger is vim inspired so should be easy?
 # have for later after learning vim (so far just got the basics)
-sudo pacman -S ranger
+yazi
+
+#pipewire display alternative
+wiremix
 
 
 # ---- Display Manager (system login) ----

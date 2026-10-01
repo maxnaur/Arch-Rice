@@ -12,6 +12,8 @@ alias grep='grep --color=auto'
 alias discord='vesktop'
 alias cl='clear'
 alias size='ncdu'
+alias kys='shutdown now'
+alias rm='sudo rm'
 
 # directory
 alias ..='cd ..;'
@@ -22,6 +24,12 @@ alias arch='cd ~/Documents/Arch-Rice/;'
 alias grub='sudo nvim /etc/default/grub;'
 # tree
 alias tree1='tree -L 1 -s'
+# access work
+alias y2='cd ~/Desktop/year-2/'
+
+# make 'safe' commands
+alias trash='mv -t ~/.local/share/Trash/files'
+alias mv='mv -i'
 
 # .bashrc
 alias bashrc='nvim ~/.bashrc; source ~/.bashrc' # worning this does not inpact the whole computer just the tab of kitty you are on sine each tab is it's own bash incident

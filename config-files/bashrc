@@ -207,7 +207,7 @@ rs() {
     local dest="$backup_root/AUR/$folder"
     sync_if_changed "$src" "$dest" "folder"
     local git="$backup_root/AUR/$folder/.git"
-    rm -rf $git
+    trash $git
     echo "rm -rf $git"
   done
 }
@@ -230,7 +230,7 @@ sync_if_changed() {
     echo "Updating: $src"
     mkdir -p "$(dirname "$dest")"
     if [ "$type" == "folder" ]; then
-      rm -rf "$dest" 2>/dev/null
+      trash "$dest" 2>/dev/null
       cp -r "$src" "$dest"
     else
       cp "$src" "$dest"

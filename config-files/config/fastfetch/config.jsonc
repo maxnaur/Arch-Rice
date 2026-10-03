@@ -2,12 +2,12 @@
   "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/master/doc/json_schema.json",
   "logo": {                // the big image
     "type": "auto",        // Logo type: auto, builtin, small, file, etc.
-    "type": "kitty",
-        "source": "$(find \"${XDG_CONFIG_HOME:-$HOME/.config}/fastfetch/animal/\" -name \"*.jpg\" | sort -R | head -1)",
-        "height": 18,
+    "source": "$(find \"${XDG_CONFIG_HOME:-$HOME/.config}/fastfetch/ascii/\" -name \"*.txt\" | sort -R | head -1)",
+    "width": null,         // Width in characters 40
+    "height": null,        // Height in characters 19
     "padding": {           // 1 char space on side
-        "top": 1,
-        "left": 1,
+        "top": 0,
+        "left": 2,
         "right": 1,
         //"bottom": 1,     // does nothing if you want padding set hight 
     },
@@ -43,10 +43,6 @@
     },
   },
   "modules": [
-    "break",
-    "break",
-    "break",
-    "break",
     {
       "type": "title",
       "keyIcon": ""

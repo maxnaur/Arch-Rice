@@ -12,6 +12,25 @@ run /usr/lib/packettracer/packettracer.AppImage
 
 
 # list of aliases as discovered
+#enable
+en
+# show run
+sh run
+# config terminal
+conf t
+# what can a comand be entered
+int ?
+# enable no shutdown on ports
+no shut
+
+# ip address 192.168.2.1 255.255.255.0
+
+# interface Gigabiteathernet1/0/1
+int G1/0/1
+# switchport mode access
+
+# cansal command
+control shift 6
 
 
 # --- Wireshark ---

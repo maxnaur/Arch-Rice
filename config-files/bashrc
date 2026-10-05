@@ -101,6 +101,13 @@ icatfolder() {
   done
 }
 
+# dnd session start
+dnd() {
+  cd ~/Pictures/DnD/Joe/Peanut/
+  firefox ~/Pictures/DnD/Joe/Peanut/Peanut.pdf
+  nvim ~/Pictures/DnD/Joe/Peanut/Peanut.txt
+}
+
 # update everything
 update() {
   yay
@@ -230,7 +237,7 @@ sync_if_changed() {
     echo "Updating: $src"
     mkdir -p "$(dirname "$dest")"
     if [ "$type" == "folder" ]; then
-      trash "$dest" 2>/dev/null
+      rm "$dest" 2>/dev/null
       cp -r "$src" "$dest"
     else
       cp "$src" "$dest"

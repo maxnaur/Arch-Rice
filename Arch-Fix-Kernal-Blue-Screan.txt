@@ -1,6 +1,0 @@
-What caused the problem
-my laptop ran out of power during an oudate.  I thoughtt it would be fine as the recovery after loosing power usualy is the same as manking the laptop go to sleep but the iso gort corruped and then I has to re set i up.
-this is how I managed this prossess
-
-
-

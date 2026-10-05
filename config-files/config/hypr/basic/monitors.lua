@@ -12,10 +12,16 @@ hl.monitor({
 	position = "0x0",
 	scale = "2",
 })
+
 hl.workspace_rule({ workspace = "1", default_name = "🐵", monitor = "eDP-1", default = true })
 hl.workspace_rule({ workspace = "2", default_name = "🦊", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "3", default_name = "🐻", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "4", default_name = "🐼", monitor = "eDP-1" })
+
+-- hl.workspace_rule({ workspace = "1", default_name = "🇬🇧", monitor = "eDP-1", default = true })
+-- hl.workspace_rule({ workspace = "2", default_name = "🏴󠁧󠁢󠁥󠁮󠁧󠁿", monitor = "eDP-1" })
+-- hl.workspace_rule({ workspace = "3", default_name = "🏴󠁧󠁢󠁳󠁣󠁴󠁿", monitor = "eDP-1" })
+-- hl.workspace_rule({ workspace = "4", default_name = "🏴󠁧󠁢󠁷󠁬󠁳󠁿", monitor = "eDP-1" })
 
 -- acer or amazon monitor screen
 hl.monitor({
@@ -24,10 +30,6 @@ hl.monitor({
 	position = "auto",
 	scale = "1",
 })
-hl.workspace_rule({ workspace = "5", default_name = "🍿", monitor = "HDMI-A-1", monitor = "DP-2", default = true })
-hl.workspace_rule({ workspace = "6", default_name = "💬", monitor = "HDMI-A-1" })
-hl.workspace_rule({ workspace = "7", default_name = "🎷", monitor = "HDMI-A-1" })
-
 -- Uni monitor screen (on usb port)
 hl.monitor({
 	output = "monitor:DP-2",
@@ -36,6 +38,14 @@ hl.monitor({
 	scale = "1.5",
 })
 
+hl.workspace_rule({ workspace = "5", default_name = "🍿", monitor = "HDMI-A-1", default = true })
+hl.workspace_rule({ workspace = "6", default_name = "💬", monitor = "HDMI-A-1" })
+hl.workspace_rule({ workspace = "7", default_name = "🎷", monitor = "HDMI-A-1" })
+
+hl.workspace_rule({ workspace = "8", default_name = "🎃" })
+hl.workspace_rule({ workspace = "9", default_name = "🃏" })
+hl.workspace_rule({ workspace = "10", default_name = "🀄️" })
+
 -- second screen will be on the right side
 hl.monitor({
 	output = "",
@@ -43,5 +53,3 @@ hl.monitor({
 	position = "auto",
 	scale = "auto",
 })
-
--- Lid Shut

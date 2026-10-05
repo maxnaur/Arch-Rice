@@ -1,0 +1,29 @@
+What caused the problem
+my laptop ran out of power during an update.  I expected it would be fine as the recovery after loosing power usually is the same as making the laptop go to sleep.
+Instead the ISO got corrupted.  I has to reset the ISO.
+This is how I managed this prossess
+
+# list drives
+lsblk -f
+# make a container for encrypted drive
+sudo cryptsetup open /dev/nvme0n1p2 container
+
+# mount drive
+sudo mount /dev/mapper/container /mnt
+sudo mount /dev/nvme0n1p1 /mnt/boot
+
+# install everything
+arch-chroot /mnt
+sudo pacman -S linux linux-firmware mkinitcpio
+sudo pacman -Syu
+
+# if you have a problem with mirrors
+vim /etc/pacman.d/mirrorlist.global
+Server = https//:mirrors.edge.kernel.org/archlinux/$repo/os/$arch
+
+# make iso
+mkinititcpio -p
+# if you want a small very small iso
+mkinititcpio -p linux
+
+

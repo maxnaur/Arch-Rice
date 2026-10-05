@@ -340,6 +340,8 @@ wiremix
 # set up grub a second time
 sudo pacman -Syu grub os-prober ntfs-3g efibootmgr
 # allow grub to detect windows
+GRUB_DISABLE_OS_PROBER=false
+sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # ---- Display Manager (system login) ----
 # login screen, terminal based ly

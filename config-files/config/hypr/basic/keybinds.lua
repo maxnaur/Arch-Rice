@@ -7,9 +7,13 @@ local fileManager = "dolphin"
 local menu = "rofi -show drun"
 local appswap = "rofi -show window"
 local screenshot = "flameshot gui"
-local internet = "zen-browser"
+local internet1 = "zen-browser"
+local internet2 = "helium-browser"
+local internet3 = "firefox"
 local discord = "bash -lc '__NV_PRIME_RENDER_OFFLOAD=0 __GLX_VENDOR_LIBRARY_NAME=mesa DRI_PRIME=0 vesktop'"
 local bluetooth = "blueberry"
+local steam = "steam"
+local minecraft = "prismlauncher"
 
 ---------------------
 ---- KEYBINDINGS ----
@@ -20,11 +24,12 @@ local mainMod = "SUPER" -- use "Windows" key as main modifier
 -- basic
 local closeWindowBind = hl.bind(mainMod .. " + C", hl.dsp.window.close())
 closeWindowBind:set_enabled(true)
+
+hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("hyprlock")) -- lock
 hl.bind(
 	mainMod .. " + M",
 	hl.dsp.exec_cmd("command -v hyprshutdown >/dev/null 2>&1 && hyprshutdown || hyprctl dispatch 'hl.dsp.exit()'")
-)
-hl.bind(mainMod .. " + N", hl.dsp.exec_cmd("hyprlock"))
+) -- logout
 
 -- launch apps
 hl.bind(mainMod .. " + Q", hl.dsp.exec_cmd(terminal))
@@ -32,9 +37,15 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("ALT + space", hl.dsp.exec_cmd(menu))
 hl.bind("ALT + tab", hl.dsp.exec_cmd(appswap))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(screenshot))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(internet))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(discord))
-hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(bluetooth))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(discord))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(bluetooth))
+
+hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(minecraft))
+hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(steam))
+
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(internet1))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(internet2))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(internet3))
 
 -- manage windows
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))

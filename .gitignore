@@ -1,0 +1,43 @@
+# items not being tracked
+
+# set up for cisco packet tracer
+# 300 mbi
+#CiscoPacketTracer_901_Ubuntu_64bit.deb
+config-files/AUR/packettracer/*.pkg.tar.zst
+
+# my web browsers
+config-files/config/BraveSoftware/
+config-files/config/net.imput.helium/
+config-files/config/zen/
+
+# not logging into my discord
+config-files/config/vesktop/*
+!config-files/config/vesktop/settings.json
+!config-files/config/vesktop/state.json
+!config-files/config/vesktop/settings/
+!config-files/config/vesktop/themes/
+
+# not getting my spoify account ID
+config-files/config/spotify-player/app.toml
+
+# config for VS Code
+config-files/config/Code/
+
+# qBittorrent sensitive (Fixed typo: added the second 'r')
+config-files/config/qBittorrent/*
+!config-files/config/qBittorrent/assets/
+!config-files/config/qBittorrent/src/
+
+# AUR section
+# We ignore the folder but allow the path to the specific C file
+config-files/AUR/*
+!config-files/AUR/Linuwu-Sense/
+config-files/AUR/Linuwu-Sense/*
+!config-files/AUR/Linuwu-Sense/src/
+config-files/AUR/Linuwu-Sense/src/*
+!config-files/AUR/Linuwu-Sense/src/linuwu_sense.c
+
+# remove my router config
+router-conf
+
+

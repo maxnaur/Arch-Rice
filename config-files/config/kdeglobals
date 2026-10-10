@@ -119,7 +119,6 @@ ForegroundPositive=166, 209, 137
 ForegroundVisited=202, 158, 230
 
 [General]
-ColorScheme=CatppuccinFrappeSky
 ColorSchemeHash=23e7713d66b5b33433faf87bcf0e4d9d896b1ade
 XftAntialias=true
 XftHintStyle=hintslight
@@ -134,7 +133,7 @@ Theme=breeze-dark
 
 [KDE]
 AnimationDurationFactor=0.5
-LookAndFeelPackage=org.kde.breezedark.desktop
+LookAndFeelPackage=Catppuccin-Frappe-Sky
 ShowDeleteCommand=false
 contrast=4
 frameContrast=0.2

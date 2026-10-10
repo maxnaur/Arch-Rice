@@ -3,16 +3,13 @@
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-# auto
-alias ls='ls --color=auto'
-alias l='ls'
-alias ll='ls -A --color=auto'
-alias lll='ls -lha --color=auto'
-alias grep='grep --color=auto'
+# basics
+alias grep='grep --color=auto -I -n'
 alias discord='vesktop'
 alias cl='clear'
 alias size='ncdu'
 alias kys='shutdown now'
+# dont let people wipe my drive
 alias rm='sudo rm'
 
 # directory
@@ -26,6 +23,16 @@ alias grub='sudo nvim /etc/default/grub;'
 alias tree1='tree -L 1 -s'
 # access work
 alias y2='cd ~/Desktop/year-2/'
+
+# switch frim ls to eza because it has icons
+#alias ls='ls --color=auto -hF'
+#alias l='ls'
+#alias ll='ls -A --color=auto'
+#alias lll='ls -lha --color=auto'
+alias ls='eza --icons --group-directories-first'
+alias l='ls'
+alias ll='eza -A --icons --group-directories-first'
+alias lll='eza -lAh --icons --group-directories-first'
 
 # make 'safe' commands
 alias trash='mv -t ~/.local/share/Trash/files'
@@ -43,9 +50,16 @@ alias gp='git push origin main'
 # full set
 gs() {
   git add .
-  git rm -r --cached .gitignore
   git commit -m "$1"
+  git pull origin main --rebase
   git push origin main
+}
+grb() {
+  rm -rf ./.git
+  git init
+  git add .
+  git commit -m "Fresh start - remove bloat"
+  git remote add origin "$1" git push -u origin main --force
 }
 
 # terminal app
@@ -156,11 +170,11 @@ cashe() {
   local before=$(df / --output=avail | tail -n 1)
 
   echo "Cleaning system cache..."
-  yes | sudo pacman -Sc              # pacman package versions
-  sudo rm -f /var/cache/pacman/pkg/* # remove anything that couldn't be removed
+  yes | sudo pacman -Sc # pacman package versions
+  #sudo rm -f /var/cache/pacman/pkg/* # remove anything that couldn't be removed
   flatpak uninstall --unused         # flatpak cash
   sudo journalctl --vacuum-size=500M # log files
-  rm -rf ~/.cache/*                  # the cache
+  #rm -rf ~/.cache/*                  # the cache
 
   # Capture disk usage after cleanup
   local after=$(df / --output=avail | tail -n 1)
@@ -194,12 +208,21 @@ rs() {
   sync_if_changed "$HOME/.bashrc" "$bashrc_dest" "file"
 
   # update etc config files
-  local etc_folders=("default/grub" "pacman.conf" "locale.gen" "ly/config.ini")
+  local etc_folders=("pacman.conf")
 
   for folder in "${etc_folders[@]}"; do
     local src="/etc/$folder"
     local dest="$backup_root/etc/$folder"
-    sync_if_changed "$src" "$dest" "file"
+    sync_if_changed "$src" "$dest" "file" "true"
+  done
+
+  # update etc config folder
+  local etc_folders=("default" "ly")
+
+  for folder in "${etc_folders[@]}"; do
+    local src="/etc/$folder"
+    local dest="$backup_root/etc/$folder"
+    sync_if_changed "$src" "$dest" "folder" "true"
   done
 
   # clear the cash inside the folders
@@ -214,7 +237,7 @@ rs() {
     local dest="$backup_root/AUR/$folder"
     sync_if_changed "$src" "$dest" "folder"
     local git="$backup_root/AUR/$folder/.git"
-    trash $git
+    rm $git
     echo "rm -rf $git"
   done
 }
@@ -223,6 +246,7 @@ sync_if_changed() {
   local src="$1"
   local dest="$2"
   local type="$3"
+  local sudos="$4"
 
   # If source doesn't exist, skip
   [[ -e "$src" ]] || return 1
@@ -238,7 +262,11 @@ sync_if_changed() {
     mkdir -p "$(dirname "$dest")"
     if [ "$type" == "folder" ]; then
       rm "$dest" 2>/dev/null
-      cp -r "$src" "$dest"
+      if [ "$sudos" == "true" ]; then
+        sudo cp -r "$src" "$dest"
+      else
+        cp -r "$src" "$dest"
+      fi
     else
       cp "$src" "$dest"
     fi

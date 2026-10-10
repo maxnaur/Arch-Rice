@@ -783,18 +783,9 @@ rm -rf ~/.cache/*
 # :qa!    -force quit all
 
 
-
-sensense sensense sensense
-
-
-
-# --- To Do List ----
-- vertual mechines
-- ls (learn everything)
-- ProtonVPN --https://wiki.archlinux.org/title/ProtonVPN
-- wireshark
-
-
+# differences I would want for next time
+- try a different style of tiling manager
+- use noctalia for colours and consistent theme https://noctalia.dev/
 
 
 # --- UnSuccessful ----
@@ -816,4 +807,6 @@ yay -S odysseus-ai-git
 # turns out it is a vertual file that is just a memory dump
 
 
-
+# how I transfer everything back
+find . -mindepth 1 -maxdepth 1 ! -wholename './.local' -exec cp -af -t ~/ -- {} +
+# install fuck at some point

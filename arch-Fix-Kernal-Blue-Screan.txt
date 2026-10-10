@@ -26,4 +26,8 @@ mkinititcpio -p
 # if you want a small very small iso
 mkinititcpio -p linux
 
+# This problem took me 2 days 10 - 12 hours
+# after the new iso I have to use the command bellow whenever I want to install update or alter a packet
+# I think my machine thinks it has more packets than it does
+pacman -Syu --overwrite '*'
 

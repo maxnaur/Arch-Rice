@@ -72,7 +72,7 @@ alias vin='vim'
 alias pacman='sudo pacman -Syu'
 
 # mount
-alias mountbig='sudo mkdir -p /mnt/sda1; sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1;'
+alias big='sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1;'
 
 # run terminal app
 export PATH="$HOME/.local/bin:$PATH"
@@ -193,13 +193,17 @@ rs() {
   mkdir -p $backup_root/AUR
 
   # update config folders
-  local folders=("BraveSoftware" "btop" "dunst" "Code" "fastfetch" "flameshot" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
+  local folders=("BraveSoftware" "btop" "dunst" "Code" "fastfetch" "flameshot" "fontconfig" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
 
   for folder in "${folders[@]}"; do
     local src="$HOME/.config/$folder"
-    local dest="$backup_root/config/$folder"
+    local dest="$backup_root/config/"
     sync_if_changed "$src" "$dest" "folder"
   done
+
+  # remove browser spesific storage
+  rm -rf "$backup_root/config/zen/3dhfb575.Default (release)/storage/temporary/"
+  rm -rf "$backup_root/config/net.imput.helium/Default/Service Worker/CacheStorage/"
 
   # kde config for hyprland with kde apps
   sync_if_changed "$HOME/.config/kdeglobals" "$backup_root/config/kdeglobals" "file"
@@ -212,7 +216,7 @@ rs() {
 
   for folder in "${etc_folders[@]}"; do
     local src="/etc/$folder"
-    local dest="$backup_root/etc/$folder"
+    local dest="$backup_root/etc/"
     sync_if_changed "$src" "$dest" "file" "true"
   done
 
@@ -221,7 +225,7 @@ rs() {
 
   for folder in "${etc_folders[@]}"; do
     local src="/etc/$folder"
-    local dest="$backup_root/etc/$folder"
+    local dest="$backup_root/etc/"
     sync_if_changed "$src" "$dest" "folder" "true"
   done
 
@@ -234,12 +238,14 @@ rs() {
 
   for folder in "${folders[@]}"; do
     local src="$HOME/AUR/$folder"
-    local dest="$backup_root/AUR/$folder"
+    local dest="$backup_root/AUR/"
     sync_if_changed "$src" "$dest" "folder"
     local git="$backup_root/AUR/$folder/.git"
     rm $git
     echo "rm -rf $git"
   done
+
+  sudo chown -R max:max $backup_root
 }
 
 sync_if_changed() {

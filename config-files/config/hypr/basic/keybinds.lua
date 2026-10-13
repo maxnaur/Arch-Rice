@@ -37,15 +37,15 @@ hl.bind(mainMod .. " + E", hl.dsp.exec_cmd(fileManager))
 hl.bind("ALT + space", hl.dsp.exec_cmd(menu))
 hl.bind("ALT + tab", hl.dsp.exec_cmd(appswap))
 hl.bind("SUPER + SHIFT + S", hl.dsp.exec_cmd(screenshot))
-hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(discord))
-hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(bluetooth))
+hl.bind(mainMod .. " + T", hl.dsp.exec_cmd(discord))
+hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(bluetooth))
 
-hl.bind(mainMod .. " + Y", hl.dsp.exec_cmd(minecraft))
-hl.bind(mainMod .. " + U", hl.dsp.exec_cmd(steam))
+hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(minecraft))
+hl.bind(mainMod .. " + F", hl.dsp.exec_cmd(steam))
 
-hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(internet1))
-hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(internet2))
-hl.bind(mainMod .. " + D", hl.dsp.exec_cmd(internet3))
+hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(internet1))
+hl.bind(mainMod .. " + A", hl.dsp.exec_cmd(internet2))
+hl.bind(mainMod .. " + S", hl.dsp.exec_cmd(internet3))
 
 -- manage windows
 hl.bind(mainMod .. " + V", hl.dsp.window.float({ action = "toggle" }))

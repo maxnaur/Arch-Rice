@@ -359,6 +359,20 @@ sudo pacman -Rns sddm-kcm sddm
 # system in
 /etc/ly/config.ini
 
+# Add new font
+# put .otf files in ~/.local/share/fonts/
+# then run
+fc-cache -fv
+# or install directly
+yay -S ttf-ms-fonts
+
+# set up default without gui
+mkdir -p ~/.config/fontconfig/
+vim ~/.config/fontconfig/fonts.conf
+fc-cache -fv
+# I'm using comic sans...
+
+# font size must be increased in a gui
 
 
 ---- Fixing Things ----
@@ -810,3 +824,4 @@ yay -S odysseus-ai-git
 # how I transfer everything back
 find . -mindepth 1 -maxdepth 1 ! -wholename './.local' -exec cp -af -t ~/ -- {} +
 # install fuck at some point
+sudo chown -R username:username /path/to/folder

@@ -1,4 +1,4 @@
-# Recent settings file for Wireshark 4.7.3.
+# Recent settings file for Wireshark 4.7.4.
 #
 # This file is regenerated each time Wireshark is quit
 # and when changing configuration profile.
@@ -70,7 +70,7 @@ gui.zoom_level: 0
 gui.bytes_view: HEX
 
 # Bytes view text encoding.
-# One of: FROM_PACKET, ASCII, EBCDIC
+# One of: FROM_PACKET, ASCII, EBCDIC, UTF-8
 gui.bytes_encoding: FROM_PACKET
 
 # Packet diagram field values show (hide).
@@ -82,7 +82,7 @@ gui.packet_diagram_field_values: false
 gui.allow_hover_selection: true
 
 # Follow stream show as.
-# One of: ASCII, ASCII_CONTROL, C_ARRAYS, EBCDIC, HEX_DUMP, HTML, IMAGE, JSON, RAW, RUST_ARRAY, UTF-8, YAML
+# One of: ASCII, ASCII_CONTROL, C_ARRAYS, EBCDIC, HEX_DUMP, HTML, IMAGE, JSON, RAW, RUST_ARRAY, UTF-8, YAML, UTF8_UNESCAPED
 gui.follow_show: ASCII
 
 # Follow stream delta times.
@@ -94,7 +94,7 @@ gui.follow_delta: NONE
 gui.show_bytes_decode: NONE
 
 # Show packet bytes show as.
-# One of: ASCII, ASCII_CONTROL, C_ARRAYS, EBCDIC, HEX_DUMP, HTML, IMAGE, JSON, RAW, RUST_ARRAY, UTF-8, YAML
+# One of: ASCII, ASCII_CONTROL, C_ARRAYS, EBCDIC, HEX_DUMP, HTML, IMAGE, JSON, RAW, RUST_ARRAY, UTF-8, YAML, UTF8_UNESCAPED
 gui.show_bytes_show: ASCII
 
 # Main window upper (or leftmost) pane size.

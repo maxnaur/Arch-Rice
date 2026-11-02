@@ -32,7 +32,7 @@
             "enabled": false
         },
         "MessageEventsAPI": {
-            "enabled": false
+            "enabled": true
         },
         "MessagePopoverAPI": {
             "enabled": false
@@ -53,7 +53,7 @@
             "enabled": false
         },
         "AlwaysExpandRoles": {
-            "enabled": false
+            "enabled": true
         },
         "AlwaysTrust": {
             "enabled": false
@@ -77,16 +77,20 @@
             "enabled": false
         },
         "BetterRoleContext": {
-            "enabled": false
+            "enabled": true
         },
         "BetterRoleDot": {
             "enabled": false
         },
         "BetterSessions": {
-            "enabled": false
+            "enabled": true,
+            "backgroundCheck": false
         },
         "BetterSettings": {
-            "enabled": false
+            "enabled": true,
+            "disableFade": true,
+            "eagerLoad": true,
+            "organizeMenu": true
         },
         "BetterUploadButton": {
             "enabled": false
@@ -98,7 +102,8 @@
             "enabled": false
         },
         "CallTimer": {
-            "enabled": false
+            "enabled": true,
+            "format": "stopwatch"
         },
         "CharacterCounter": {
             "enabled": false
@@ -125,13 +130,15 @@
             "enabled": false
         },
         "CopyStickerLinks": {
-            "enabled": false
+            "enabled": true
         },
         "CopyUserURLs": {
             "enabled": false
         },
         "CrashHandler": {
-            "enabled": true
+            "enabled": true,
+            "attemptToPreventCrashes": true,
+            "attemptToNavigateToHome": false
         },
         "CustomCommands": {
             "enabled": false
@@ -157,20 +164,27 @@
         "Experiments": {
             "enabled": false
         },
-        "ExpressionCloner": {
-            "enabled": false
-        },
         "F8Break": {
             "enabled": false
         },
         "FakeNitro": {
-            "enabled": false
+            "enabled": true,
+            "enableStickerBypass": true,
+            "enableStreamQualityBypass": true,
+            "enableEmojiBypass": true,
+            "transformEmojis": true,
+            "transformStickers": true,
+            "emojiSize": 48,
+            "stickerSize": 160,
+            "transformCompoundSentence": false,
+            "useHyperLinks": true,
+            "disableEmbedPermissionCheck": false
         },
         "FakeProfileThemes": {
             "enabled": false
         },
         "FavoriteEmojiFirst": {
-            "enabled": false
+            "enabled": true
         },
         "FixCodeblockGap": {
             "enabled": false
@@ -260,7 +274,7 @@
             "enabled": false
         },
         "MutualGroupDMs": {
-            "enabled": false
+            "enabled": true
         },
         "NewGuildSettings": {
             "enabled": false
@@ -326,7 +340,7 @@
             "enabled": false
         },
         "PermissionsViewer": {
-            "enabled": false
+            "enabled": true
         },
         "petpet": {
             "enabled": false
@@ -506,7 +520,8 @@
             "enabled": false
         },
         "VolumeBooster": {
-            "enabled": true
+            "enabled": true,
+            "multiplier": 2
         },
         "WebKeybinds": {
             "enabled": true,
@@ -559,6 +574,13 @@
             "enabled": true
         },
         "GifProviderSwitcher": {
+            "enabled": true,
+            "provider": "tenor"
+        },
+        "FixDiscordCss": {
+            "enabled": true
+        },
+        "ExpressionManager": {
             "enabled": false
         }
     },
@@ -576,7 +598,7 @@
         "authenticated": false,
         "url": "https://api.vencord.dev/",
         "settingsSync": false,
-        "settingsSyncVersion": 1791634113563
+        "settingsSyncVersion": 1793442505395
     },
     "nativeTitleBar": false
 }

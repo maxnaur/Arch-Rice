@@ -820,8 +820,8 @@ yay -S odysseus-ai-git
 # I don't have that much storage so I had a look and the file is only 112 lines
 # turns out it is a vertual file that is just a memory dump
 
+# when you reload a source it only impacts the namespace (sandbox) that the command is inside
+alias bashrc='nvim ~/.bashrc; source ~/.bashrc' # warning this does not inpact the whole computer just the tab of kitty you are on sine each tab is it's own bash incident
 
-# how I transfer everything back
-find . -mindepth 1 -maxdepth 1 ! -wholename './.local' -exec cp -af -t ~/ -- {} +
-# install fuck at some point
+# set permitions for file
 sudo chown -R username:username /path/to/folder

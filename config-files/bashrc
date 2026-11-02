@@ -5,56 +5,93 @@
 
 # basics
 alias grep='grep --color=auto -I -n'
-alias discord='vesktop'
-alias cl='clear'
 alias size='ncdu'
+# Power the system
 alias kys='shutdown now'
-# dont let people wipe my drive
+alias unkys='reboot'
+# dont let people wipe my drive without admin
 alias rm='sudo rm'
 
 # directory
+alias .='pwd'
 alias ..='cd ..;'
 alias ...='cd ..; cd .. ;'
+alias ....='cd ..; cd ..; cd .. ;'
+# TUI
+alias tui='yazi'
+# go to direcorys I use ofthen
 alias hypr='cd ~/.config/hypr/;'
 alias arch='cd ~/Documents/Arch-Rice/;'
-# grub
-alias grub='sudo nvim /etc/default/grub;'
-# tree
-alias tree1='tree -L 1 -s'
-# access work
-alias y2='cd ~/Desktop/year-2/'
+# access work with a tree
+y() {
+  local base_dir="$HOME/Desktop/year-2"
+  local target_dir=""
+  case "$1" in
+    c) # Cryptography
+      target_dir="$base_dir/Cryptofraphy"
+      ;;
+    d) # Data Analytics
+      target_dir="$base_dir/Data-Analitics"
+      ;;
+    n) # Network
+      target_dir="$base_dir/Network"
+      ;;
+    o) # OS
+      target_dir="$base_dir/OS"
+      ;;
+    *) # Default
+      cd "$dir"
+      return
+      ;;
+  esac
 
-# switch frim ls to eza because it has icons
-#alias ls='ls --color=auto -hF'
-#alias l='ls'
-#alias ll='ls -A --color=auto'
-#alias lll='ls -lha --color=auto'
-alias ls='eza --icons --group-directories-first'
-alias l='ls'
+  if [ -n "$2" ]; then
+    mkdir -p "$target_dir/week-$2"
+    cd "$target_dir/week-$2"
+  else
+    cd "$dir"
+  fi
+}
+
+# switch frim ls to eza because it has icons and has pritty colours
+alias l='eza --icons --group-directories-first'
 alias ll='eza -A --icons --group-directories-first'
 alias lll='eza -lAh --icons --group-directories-first'
 
-# make 'safe' commands
+# make commands safe
 alias trash='mv -t ~/.local/share/Trash/files'
 alias mv='mv -i'
 
-# .bashrc
-alias bashrc='nvim ~/.bashrc; source ~/.bashrc' # worning this does not inpact the whole computer just the tab of kitty you are on sine each tab is it's own bash incident
-alias bashcr='bashrc'
+# Connect to a Router and Switch through terminal
+#alias putty='sudo screen /dev/ttyUSB0 9600'
+# this function allows the user to enter the USB port number for cisco devices
+putty() {
+  ls /dev | grep ttyUSB
+  read -r -n 1 -p "" k
+  sudo screen /dev/ttyUSB"$k" 9600
+}
 
-# Sync Arch-Rice to github
+# .bashrc
+alias bashrc='nvim ~/.bashrc; source ~/.bashrc'
+
+# wipe access
+access() { sudo chown -R max:max "$1"; }
+
+# Git
 alias ga='git add .'
-gr() { git rm -r --cached ."$1"; }
+gr() { git rm -r --cached .gitignore; }
+#gr() { git rm -r --cached ."$1"; }
 gc() { git commit -m "$1"; }
 alias gp='git push origin main'
-# full set
+# Full git sync bash scipt
 gs() {
   git add .
   git commit -m "$1"
   git pull origin main --rebase
   git push origin main
 }
-grb() {
+# reset Git Rebuild Directory
+grd() {
   rm -rf ./.git
   git init
   git add .
@@ -62,28 +99,23 @@ grb() {
   git remote add origin "$1" git push -u origin main --force
 }
 
+# mount windows drive
+wmount() {
+  sudo mount -t ntfs-3g "$1" "$2"
+  access "$2"
+}
+
 # terminal app
 alias spotify='spotify_player;'
-alias spotify-player='spotify_player'
 alias sense='arch-sense;'
 alias vim='nvim'
-alias vin='vim'
-#alias nano='nvim'
-alias pacman='sudo pacman -Syu'
+alias vpn='protonvpn-app'
 
-# mount
-alias big='sudo mount -t ntfs-3g /dev/sda1 /mnt/sda1;'
-
-# run terminal app
+# run terminal app when a comand can't be found
 export PATH="$HOME/.local/bin:$PATH"
 
-# run minecraft-server
-alias minecraft-server='~/Documents/Arch-Rice/minecraft-server/start-server.sh'
-
 # image display
-icat() {
-  kitten icat "$@"
-}
+icat() { kitten icat "$@"; }
 
 # image folder display with dellay between images
 icatfolder() {
@@ -97,7 +129,6 @@ icatfolder() {
       -iname '*.webp' -o -iname '*.gif' -o -iname '*.bmp' \
       \) | sort
   )
-  # ensure input
   if ((${#files[@]} == 0)); then
     echo "No images found in: $dir" >&2
     return 1
@@ -118,29 +149,19 @@ icatfolder() {
 # dnd session start
 dnd() {
   cd ~/Pictures/DnD/Joe/Peanut/
-  firefox ~/Pictures/DnD/Joe/Peanut/Peanut.pdf
+  firefox ~/Pictures/DnD/Joe/Peanut/Peanut.pdf &
   nvim ~/Pictures/DnD/Joe/Peanut/Peanut.txt
-}
-
-# update everything
-update() {
-  yay
-  flatpak update
 }
 
 # update and clear cashe
 updateclear() {
-  yes | cashe
-  yes | yay
-  yes | flatpak update
-  yes | fanfix
+  cashe
+  yay -y
+  flatpak update -y
+  fixfans
 }
 
-#Linuwu-Sense() {
-fanfix() {
-  # fix nvidia drivers
-  #sudo pacman -Sy linux-headers
-
+fixfans() {
   cd ~/AUR/ || return
 
   if [ -d "Linuwu-Sense" ]; then
@@ -169,114 +190,60 @@ cashe() {
   # This looks at the available space on the root partition
   local before=$(df / --output=avail | tail -n 1)
 
-  echo "Cleaning system cache..."
-  yes | sudo pacman -Sc # pacman package versions
-  #sudo rm -f /var/cache/pacman/pkg/* # remove anything that couldn't be removed
+  sudo pacman -Sc -y                 # pacman package versions
   flatpak uninstall --unused         # flatpak cash
   sudo journalctl --vacuum-size=500M # log files
-  #rm -rf ~/.cache/*                  # the cache
+  #rm -rf ~/.cache/*                  # clear everything in the cache (not the best solution but worked when I was having real problems)
 
   # Capture disk usage after cleanup
   local after=$(df / --output=avail | tail -n 1)
-  local saved=$((after - before))  # Calculate the difference
-  local saved_mb=$((saved / 1024)) # Convert Kilobytes to Megabytes for readability
+  local saved=$((after - before) / 1024)
 
   echo "Space recovered: ${saved_mb} MB"
 }
 
-# rice update config files
-rs() {
-  local backup_root="$HOME/Documents/Arch-Rice/config-files"
-  local bashrc_dest="$HOME/Documents/Arch-Rice/config-files/bashrc"
-  mkdir -p $backup_root/config
-  mkdir -p $backup_root/etc
-  mkdir -p $backup_root/AUR
 
-  # update config folders
-  local folders=("BraveSoftware" "btop" "dunst" "Code" "fastfetch" "flameshot" "fontconfig" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
-
-  for folder in "${folders[@]}"; do
-    local src="$HOME/.config/$folder"
-    local dest="$backup_root/config/"
-    sync_if_changed "$src" "$dest" "folder"
-  done
-
-  # remove browser spesific storage
-  rm -rf "$backup_root/config/zen/3dhfb575.Default (release)/storage/temporary/"
-  rm -rf "$backup_root/config/net.imput.helium/Default/Service Worker/CacheStorage/"
-
-  # kde config for hyprland with kde apps
-  sync_if_changed "$HOME/.config/kdeglobals" "$backup_root/config/kdeglobals" "file"
-
-  # update bashrc
-  sync_if_changed "$HOME/.bashrc" "$bashrc_dest" "file"
-
-  # update etc config files
-  local etc_folders=("pacman.conf")
-
-  for folder in "${etc_folders[@]}"; do
-    local src="/etc/$folder"
-    local dest="$backup_root/etc/"
-    sync_if_changed "$src" "$dest" "file" "true"
-  done
-
-  # update etc config folder
-  local etc_folders=("default" "ly")
-
-  for folder in "${etc_folders[@]}"; do
-    local src="/etc/$folder"
-    local dest="$backup_root/etc/"
-    sync_if_changed "$src" "$dest" "folder" "true"
-  done
-
-  # clear the cash inside the folders
-  local remove_folder=("/config/discord/Cache" "/config/vesktop/Code Cache" "/config/vesktop/Crashpad" "")
-  local remove_file=("/config/vesktop/SingletonCookie" "/config/vesktop/SingletonLock" "/config/vesktop/SingletonSocket" "")
-
-  # update config folders
-  local folders=("Linuwu-Sense" "packettracer" "yay-bin")
-
-  for folder in "${folders[@]}"; do
-    local src="$HOME/AUR/$folder"
-    local dest="$backup_root/AUR/"
-    sync_if_changed "$src" "$dest" "folder"
-    local git="$backup_root/AUR/$folder/.git"
-    rm $git
-    echo "rm -rf $git"
-  done
-
-  sudo chown -R max:max $backup_root
+rc() {
+  rice-backup
+  cd "$HOME/Documents/Arch-Rice/"
+  gs "$1"
 }
 
-sync_if_changed() {
-  local src="$1"
-  local dest="$2"
-  local type="$3"
-  local sudos="$4"
+# rice update config files
+rice-backup() {
+  local DEST_DIR="$HOME/Documents/Arch-Rice/config-files"
 
-  # If source doesn't exist, skip
-  [[ -e "$src" ]] || return 1
+  # Create backup directories
+  mkdir -p "$DEST_DIR"/{config,etc,AUR}
 
-  # Generate hash of CONTENT only, ignoring file paths
-  # We find all files, and for each file, we feed the content into sha256sum
-  # 'cat' ensures we are hashing the bytes of the file, not the filename string
-  local src_hash=$(LC_ALL=C find "$src" -type f -print0 | sort -z | xargs -0 cat | sha256sum | awk '{print $1}')
-  local dest_hash=$(LC_ALL=C find "$dest" -type f -print0 | sort -z | xargs -0 cat | sha256sum | awk '{print $1}')
+  # Sync config folders
+  local config_folders=("BraveSoftware" "btop" "dunst" "Code" "fastfetch" "flameshot" "fontconfig" "hypr" "kitty" "net.imput.helium" "nvim" "pacseek" "qBittorrent" "rofi" "spotify-player" "vesktop" "waybar" "wireshark" "zen")
 
-  if [ "$src_hash" != "$dest_hash" ]; then
-    echo "Updating: $src"
-    mkdir -p "$(dirname "$dest")"
-    if [ "$type" == "folder" ]; then
-      rm "$dest" 2>/dev/null
-      if [ "$sudos" == "true" ]; then
-        sudo cp -r "$src" "$dest"
-      else
-        cp -r "$src" "$dest"
-      fi
-    else
-      cp "$src" "$dest"
-    fi
-  fi
+  for folder in "${config_folders[@]}"; do
+    mkdir "$DEST_DIR/config/$folder/"
+    rsync -av --delete "$HOME/.config/$folder/" "$DEST_DIR/config/$folder/"
+  done
+
+  # Remove browser-specific storage
+  rm -rf "$DEST_DIR/config/zen/3dhfb575.Default (release)/storage/temporary/"
+  rm -rf "$DEST_DIR/config/net.imput.helium/Default/Service Worker/CacheStorage/"
+  rm -rf "$DEST_DIR/config/net.imput.helium/Default/Service Worker/CacheStorage/"
+
+  # Sync KDE config
+  rsync -av "$HOME/.config/kdeglobals" "$DEST_DIR/config/"
+
+  # Sync bashrc
+  rsync -av "$HOME/.bashrc" "$DEST_DIR/bashrc"
+
+  # Sync /etc files and folders with sudo
+  rsync -av --delete "$HOME/.config/kdeglobals" "$DEST_DIR/config/"
+  sudo rsync -av "$HOME/AUR/" "$DEST_DIR/AUR/" --exclude='.git'
+  sudo rsync -av "/etc/pacman.conf" "$DEST_DIR/etc/"
+  sudo rsync -av --delete "/etc/default/" "$DEST_DIR/etc/default/"
+  sudo rsync -av --delete "/etc/ly/" "$DEST_DIR/etc/ly/"
+
+  # Fix ownership
+  sudo chown -R max:max "$DEST_DIR"
 }
 
 # run vertual mechine
@@ -284,6 +251,79 @@ vm() {
   sudo systemctl start libvirtd
   sudo virsh net-start default
   virt-manager
+}
+
+# copy folder
+copy() {
+  set -uo pipefail
+
+  SOURCE_DIR="${1:-}"
+  DEST_DIR="${2:-}"
+  THREADS="${3:-28}" # default of 28 THREADS a lost more than in the code so each file is able to have a THREAD to copy it
+
+  if [[ -z "$SOURCE_DIR" || -z "$DEST_DIR" ]]; then
+    echo "Usage: $0 <source_directory> <destination_directory> [jobs]" >&2
+    return 1
+  fi
+
+  if [[ ! "$THREADS" =~ ^[1-9][0-9]*$ ]]; then
+    echo "Error: jobs must be a positive integer" >&2
+    return 1
+  fi
+
+  if [[ ! -d "$SOURCE_DIR" || ! -d "$DEST_DIR" ]]; then
+    if [[ ! -d "$SOURCE_DIR" ]]; then
+      echo "Error: source directory does not exist: $SOURCE_DIR" >&2
+    else
+      echo "Error: destination directory does not exist: $DEST_DIR" >&2
+    fi
+    return 1
+  fi
+
+  SOURCE_DIR="$(realpath -- "$SOURCE_DIR")"
+  DEST_DIR="$(realpath -- "$DEST_DIR")"
+
+  if [[ "$SOURCE_DIR" == "$DEST_DIR" ]]; then
+    echo "Source and destination are the same directory; nothing to copy." >&2
+    return 0
+  fi
+
+  case "$DEST_DIR/" in "$SOURCE_DIR/"*)
+    echo "Error: destination is inside the source directory; refusing to copy recursively." >&2
+    return 1
+    ;;
+  esac
+
+  command -v rsync >/dev/null || {
+    echo "Error: rsync is required" >&2
+    return 1
+  }
+
+  # Each top-level entry is a separate THREAD. NUL delimiters safely handle
+  # spaces, quotes, and newlines in filenames.
+  find "$SOURCE_DIR" -mindepth 1 -maxdepth 1 -print0 |
+    xargs -0 -r -n 1 -P "$THREADS" \
+      bash -c '
+            source_dir=$1
+            dest_dir=$2
+            src=$3
+
+            rel=${src#"$source_dir"/}
+            rsync -a -- "$src" "$dest_dir/$rel" || exit $?
+            printf "Synced: %s\n" "$rel"
+        ' _ "$SOURCE_DIR" "$DEST_DIR"
+}
+
+# clear drive
+clear-drive() {
+  rm -r *
+  echo "rm -r *"
+  rm *
+  echo "rm *"
+  rm -r .*
+  exho "rm -r .*"
+  rm .*
+  exho "rm *"
 }
 
 # the username on the left side

@@ -23,7 +23,7 @@ config-files/config/spotify-player/app.toml
 # config for VS Code
 config-files/config/Code/
 
-# qBittorrent sensitive (Fixed typo: added the second 'r')
+# qBittorrent don't upload torrent ISO's (I like installing systems to much)
 config-files/config/qBittorrent/*
 !config-files/config/qBittorrent/assets/
 !config-files/config/qBittorrent/src/
@@ -36,8 +36,4 @@ config-files/AUR/Linuwu-Sense/*
 !config-files/AUR/Linuwu-Sense/src/
 config-files/AUR/Linuwu-Sense/src/*
 !config-files/AUR/Linuwu-Sense/src/linuwu_sense.c
-
-# remove my router config
-router-conf
-
 

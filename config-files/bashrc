@@ -6,6 +6,7 @@
 # basics
 alias grep='grep --color=auto -I -n'
 alias size='ncdu'
+alias tui='yazi'
 # Power the system
 alias kys='shutdown now'
 alias unkys='reboot'
@@ -17,8 +18,6 @@ alias .='pwd'
 alias ..='cd ..;'
 alias ...='cd ..; cd .. ;'
 alias ....='cd ..; cd ..; cd .. ;'
-# TUI
-alias tui='yazi'
 # go to direcorys I use ofthen
 alias hypr='cd ~/.config/hypr/;'
 alias arch='cd ~/Documents/Arch-Rice/;'
@@ -40,16 +39,18 @@ y() {
       target_dir="$base_dir/OS"
       ;;
     *) # Default
-      cd "$dir"
-      return
+      target_dir="$base_dir"
       ;;
   esac
 
-  if [ -n "$2" ]; then
+  if [ "$2" = "a" ]; then
+    mkdir -p "$target_dir/assiginment"
+    cd "$target_dir/assiginment"
+  elif [ -n "$2" ]; then
     mkdir -p "$target_dir/week-$2"
     cd "$target_dir/week-$2"
   else
-    cd "$dir"
+    cd "$target_dir"
   fi
 }
 
@@ -62,17 +63,25 @@ alias lll='eza -lAh --icons --group-directories-first'
 alias trash='mv -t ~/.local/share/Trash/files'
 alias mv='mv -i'
 
-# Connect to a Router and Switch through terminal
+# Connect to a Router and Switch through the terminal
 #alias putty='sudo screen /dev/ttyUSB0 9600'
 # this function allows the user to enter the USB port number for cisco devices
 putty() {
   ls /dev | grep ttyUSB
   read -r -n 1 -p "" k
-  sudo screen /dev/ttyUSB"$k" 9600
+  if [ "$k" != "q" ]; then
+    sudo screen /dev/ttyUSB"$k" 9600
+  else
+    echo ""
+  fi
 }
 
 # .bashrc
 alias bashrc='nvim ~/.bashrc; source ~/.bashrc'
+# grub
+alias grub='sudo vim /etc/default/grub; sudo update-grub'
+# ly
+alias config-ly='sudo vim /etc/ly/config.ini'
 
 # wipe access
 access() { sudo chown -R max:max "$1"; }
@@ -100,6 +109,7 @@ grd() {
 }
 
 # mount windows drive
+alias lint-mount='lsblk -f'
 wmount() {
   sudo mount -t ntfs-3g "$1" "$2"
   access "$2"
@@ -203,7 +213,7 @@ cashe() {
 }
 
 
-rc() {
+rice() {
   rice-backup
   cd "$HOME/Documents/Arch-Rice/"
   gs "$1"
@@ -321,9 +331,9 @@ clear-drive() {
   rm *
   echo "rm *"
   rm -r .*
-  exho "rm -r .*"
+  echo "rm -r .*"
   rm .*
-  exho "rm *"
+  echo "rm *"
 }
 
 # the username on the left side

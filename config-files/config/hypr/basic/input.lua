@@ -16,7 +16,7 @@ hl.config({
 
 		follow_mouse = 1, -- when mouse move hilight the tab you are on
 
-		sensitivity = -0.2, -- -1.0 - 1.0, 0 means no modification.
+		sensitivity = 0.6, -- -1.0 - 1.0, 0 means no modification.
 		force_no_accel = true,
 		natural_scroll = false,
 

@@ -346,6 +346,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # ---- Display Manager (system login) ----
 # login screen, terminal based ly
 ly
+# install animation
+yay -S pablodraw
 # set up using:
 #https://wiki.archlinux.org/title/Ly
 # enable ly@ttyX.service, then disable getty@ttyX.service where X stands for a number from 1 to 6 (for me it is 1)
@@ -354,8 +356,6 @@ sudo systemctl enable ly@tty1.service
 systemctl disable getty@tty1.service
 # remove plasma display manager
 sudo pacman -Rns sddm-kcm sddm
-# user in
-~/.config/ly
 # system in
 /etc/ly/config.ini
 

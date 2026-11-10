@@ -53,6 +53,18 @@ y() {
     cd "$target_dir"
   fi
 }
+# rsync
+sync() { sudo rsync -a --no-owner --no-group HW --inplace -v "$1" "$2"; }
+# Backup my dir
+backup() {
+  sudo rsync -a --no-owner --no-group --inplace -v \
+    --exclude='Videos/' \
+    --exclude='Documents/OS/' \
+    --exclude='Downloads/' \
+    --exclude='.local/share/Steam' \
+    --exclude='.local/share/Trash' \
+    "${HOME}/" "$1"
+}
 
 # switch frim ls to eza because it has icons and has pritty colours
 alias l='eza --icons --group-directories-first'
@@ -112,6 +124,10 @@ grd() {
 alias lint-mount='lsblk -f'
 wmount() {
   sudo mount -t ntfs-3g "$1" "$2"
+  access "$2"
+}
+fmount() {
+  sudo mount -t exfat "$1" "$2"
   access "$2"
 }
 

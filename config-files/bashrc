@@ -44,8 +44,8 @@ y() {
   esac
 
   if [ "$2" = "a" ]; then
-    mkdir -p "$target_dir/assiginment"
-    cd "$target_dir/assiginment"
+    mkdir -p "$target_dir/assignment"
+    cd "$target_dir/assignment"
   elif [ -n "$2" ]; then
     mkdir -p "$target_dir/week-$2"
     cd "$target_dir/week-$2"
@@ -55,7 +55,7 @@ y() {
 }
 # rsync
 sync() { sudo rsync -a --no-owner --no-group HW --inplace -v "$1" "$2"; }
-# Backup my dir
+# Backup my drive to external devices
 backup() {
   sudo rsync -a --no-owner --no-group --inplace -v \
     --exclude='Videos/' \
@@ -253,7 +253,6 @@ rice-backup() {
   # Remove browser-specific storage
   rm -rf "$DEST_DIR/config/zen/3dhfb575.Default (release)/storage/temporary/"
   rm -rf "$DEST_DIR/config/net.imput.helium/Default/Service Worker/CacheStorage/"
-  rm -rf "$DEST_DIR/config/net.imput.helium/Default/Service Worker/CacheStorage/"
 
   # Sync KDE config
   rsync -av "$HOME/.config/kdeglobals" "$DEST_DIR/config/"
@@ -276,7 +275,7 @@ rice-backup() {
 vm() {
   sudo systemctl start libvirtd
   sudo virsh net-start default
-  virt-manager
+  virt-manager &
 }
 
 # copy folder

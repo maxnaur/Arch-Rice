@@ -2,12 +2,12 @@
 ---- MONITORS ----
 ------------------
 
--- See https://wiki.hypr.land/Configuring/Basics/Monitors/
+-- See https://wiki.hypr.land/configuring/core/monitors/
 -- hyprctl monitors all
 
 -- laptop screen
 hl.monitor({
-	output = "monitor:eDP-1",
+	output = "eDP-1",
 	mode = "2560x1600@240",
 	position = "0x0",
 	scale = "2",
@@ -18,10 +18,10 @@ hl.workspace_rule({ workspace = "2", default_name = "🦊", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "3", default_name = "🐻", monitor = "eDP-1" })
 hl.workspace_rule({ workspace = "4", default_name = "🐼", monitor = "eDP-1" })
 
--- hl.workspace_rule({ workspace = "1", default_name = "🇬🇧", monitor = "eDP-1", default = true })
--- hl.workspace_rule({ workspace = "2", default_name = "🏴󠁧󠁢󠁥󠁮󠁧󠁿", monitor = "eDP-1" })
--- hl.workspace_rule({ workspace = "3", default_name = "🏴󠁧󠁢󠁳󠁣󠁴󠁿", monitor = "eDP-1" })
--- hl.workspace_rule({ workspace = "4", default_name = "🏴󠁧󠁢󠁷󠁬󠁳󠁿", monitor = "eDP-1" })
+-- hl.workspace_rule({ workspace = "1", default_name = "🇬🇧", monitor = "ID 0", default = true })
+-- hl.workspace_rule({ workspace = "2", default_name = "🏴󠁧󠁢󠁥󠁮󠁧󠁿", monitor = "ID 0" })
+-- hl.workspace_rule({ workspace = "3", default_name = "🏴󠁧󠁢󠁳󠁣󠁴󠁿", monitor = "ID 0" })
+-- hl.workspace_rule({ workspace = "4", default_name = "🏴󠁧󠁢󠁷󠁬󠁳󠁿", monitor = "ID 0" })
 
 -- acer or amazon monitor screen
 hl.monitor({

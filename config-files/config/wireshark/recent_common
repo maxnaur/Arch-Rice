@@ -18,10 +18,10 @@
 
 # Main window geometry.
 # Decimal numbers.
-gui.geometry_main_x: 0
+gui.geometry_main_x: 1280
 gui.geometry_main_y: 0
-gui.geometry_main_width: 787
-gui.geometry_main_height: 469
+gui.geometry_main_width: 1267
+gui.geometry_main_height: 689
 
 # Main window maximized.
 # true or false (case-insensitive).
@@ -29,7 +29,7 @@ gui.geometry_main_maximized: true
 
 # Main window geometry state.
 # Hex byte string.
-gui.geometry_main: 01d9d0cb00030000000000000000000000000312000001d40000000000000000fffffffefffffffe00000000020000000640000000000000000000000312000001d4
+gui.geometry_main: 01d9d0cb000300000000050000000000000009f2000002b00000050000000000000009f2000002b000000001020000000a000000050000000000000009f2000002b0
 
 # Leftalign Action Buttons.
 # true or false (case-insensitive).
